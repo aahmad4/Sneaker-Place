@@ -15,6 +15,10 @@ var commentRoutes = require("./routes/comments"),
 	shoeRoutes = require("./routes/shoes"),
 	indexRoutes = require("./routes/index");
 
+const session = require('express-session'),
+      MongoStore = require('connect-mongo')(session);
+
+
 // mongoose.connect("mongodb://localhost:27017/xtocks", {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.connect("mongodb+srv://aahmad4:aahmad4@cluster0.mfoxo.mongodb.net/xtocks?retryWrites=true&w=majority", 
 	{
@@ -57,6 +61,8 @@ app.use("/", indexRoutes);
 app.use("/shoes", shoeRoutes);
 app.use("/shoes/:id/comments", commentRoutes);
 
-app.listen(3000, function() { 
-  console.log('XtockS Server listening on port 3000'); 
-});
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
+app.listen(port);
