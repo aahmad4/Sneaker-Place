@@ -20,7 +20,7 @@
 	</div>
 	
 	<div class="row text-center" style="display:flex; flex-wrap:wrap;">
-		<% shoes.forEach(function(shoe){ %>
+		<% shoes.reverse().forEach(function(shoe){ %>
 		<div class="col-md-3 col-sm-6">
 			<div class="thumbnail">
 				<img src="<%= shoe.image %>">
