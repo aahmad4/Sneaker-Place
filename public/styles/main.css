@@ -1,0 +1,31 @@
+body {
+  font-family: Roboto, sans-serif;
+  background-color: #EDF2F7;
+}
+
+*:focus{
+  outline: none;
+}
+
+.btn-primary {
+	background-color: rgb(8, 160, 92);
+}
+
+.navbar-default {
+  background-color: #3563DB!important;
+  border-color: #3563DB!important;
+  border-radius:0px;
+
+}
+
+.thumbnail img {
+	width: 100%;
+}
+
+.thumbnail .caption-full {
+	padding: 9px;
+}
+
+#delete-form {
+	display: inline;
+}

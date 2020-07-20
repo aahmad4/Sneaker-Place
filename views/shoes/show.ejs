@@ -1,0 +1,52 @@
+<%- include("../partials/header") %>
+<div class="container">
+	<div class="row">
+		<div class="col-md-3"> 
+			<p class="lead">XtockS</p>
+			<div class="list-group"> 
+				<li class="list-group-item">View Similar Products</li>
+				<li class="list-group-item">Compare Prices</li>
+				<li class="list-group-item">Contact Owner</li>  
+			</div>
+		</div>
+		<div class="col-md-9">
+			<div class="thumbnail">
+				<img class="img-responsive" src="<%= shoe.image %>">
+				<div class="caption-full">
+					<h4 class="pull-right">$<%= shoe.price %></h4>
+					<h4><a><%= shoe.name %></a></h4>
+					<p>	<%= shoe.description %></p>
+					<p> <em>Submitted By <%= shoe.author.username %></em> </p>
+					<% if (currentUser && shoe.author.id.equals(currentUser._id)) { %>
+						<a href="/shoes/<%= shoe._id %>/edit" class="btn btn-xs btn-warning">Edit</a>
+						<form id="delete-form" style="display: inline" action="/shoes/<%= shoe._id %>?_method=DELETE" method="POST">
+							<button id="delete-form"  class="btn btn-danger btn-xs">Delete</button>
+						</form>
+					<% } %>
+				</div>
+			</div>
+			<div class="well">
+				<div class="text-right">
+					<a class="btn btn-success" href="/shoes/<%= shoe._id %>/comments/new">Add New Comment</a>
+				</div>
+				<hr>
+				<% shoe.comments.forEach(function(comment){ %>
+					<div class="row">
+						<div class="col-md-12">
+							<strong><%= comment.author.username %></strong>
+							<span class="pull-right">10 days ago</span>
+							<p><%= comment.text %></p>
+							<% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
+							<a class="btn btn-xs btn-warning" href="/shoes/<%=shoe._id%>/comments/<%=comment._id%>/edit">Edit</a>
+							<form action="/shoes/<%=shoe._id%>/comments/<%=comment._id%>/?_method=DELETE" method="POST" style="display:inline;">
+								<input type="submit" class="btn btn-xs btn-danger" value="Delete">
+							</form>
+							<% } %>
+						</div>
+					</div>
+				<% }) %>
+			</div>
+		</div>
+	</div>
+</div>
+<%- include("../partials/footer") %>

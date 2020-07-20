@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>    
+		<title>XtockS</title>
+		<link rel="apple-touch-icon" sizes="180x180" href="/styles/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/styles/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/styles/favicon-16x16.png">
+		<link rel="manifest" href="/styles/site.webmanifest">
+		<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    	<meta name="HandheldFriendly" content="true" "width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/styles/main.css">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+	</head>
+	<body>
+	<nav class="navbar navbar-default" style="">
+	<div class="container" style="">
+	<div class="container-fluid" style="">
+		<div class="navbar-header" style="">
+			<a class="navbar-brand" href="/" style="color:white;"><strong>XtockS</strong></a>
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="navbar-nav navbar-right nav" style="">
+				<% if (!currentUser) { %>
+					<li><a href="/login" style="color:white;">Login</a></li>	
+					<li><a href="/register" style="color:white;">Sign Up</a></li>
+				<% } else { %>
+					<li><a href="#" style="color:white;">Signed In As <%=currentUser.username%></a></li>
+					<li><a href="/logout" style="color:white;">Logout</a></li>
+				<% } %>
+			</ul>
+		</div>
+	</div>
+	</div>
+	</nav>
+	<div class="container">
+		<% if (error && error.length > 0){ %>
+			<div class="alert alert-danger" role="alert">
+				<%= error %>
+			</div>
+		<% } %>
+		<% if (success && success.length > 0){ %>
+			<div class="alert alert-success" role="alert">
+				<%= success %>
+			</div>
+		<% } %>
+	</div>
+		
+		
+		
