@@ -16,7 +16,14 @@ var commentRoutes = require("./routes/comments"),
 	indexRoutes = require("./routes/index");
 
 // mongoose.connect("mongodb://localhost:27017/xtocks", {useNewUrlParser: true, useUnifiedTopology: true});
-mongoose.connect("mongodb+srv://aahmad4:aahmad4@cluster0.mfoxo.mongodb.net/xtocks?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb+srv://aahmad4:aahmad4@cluster0.mfoxo.mongodb.net/xtocks?retryWrites=true&w=majority", 
+	{
+		useNewUrlParser: true, 
+		useUnifiedTopology: true,
+		useCreateIndex: true,
+		useFindAndModify: false
+	}
+);
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
