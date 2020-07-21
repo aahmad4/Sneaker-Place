@@ -24,10 +24,12 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="navbar-nav navbar-right nav" style="">
 				<% if (!currentUser) { %>
+					<li><a href="/feed" style="color:white;">Feed</a></li>
 					<li><a href="/login" style="color:white;">Login</a></li>	
 					<li><a href="/register" style="color:white;">Sign Up</a></li>
 				<% } else { %>
 					<li><a href="#" style="color:white;">Signed In As <%=currentUser.username%></a></li>
+					<li><a href="/feed" style="color:white;">Feed</a></li>
 					<li><a href="/logout" style="color:white;">Logout</a></li>
 				<% } %>
 			</ul>

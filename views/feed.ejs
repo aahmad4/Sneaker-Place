@@ -1,0 +1,46 @@
+<%- include("./partials/header") %>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 style="margin-bottom:2%;">Latest Releases!</h3>
+        </div>
+    </div>
+    <% for (var i = 0; i < 100; i++){ %>
+        <% if (parsedData['results'][i].media.imageUrl) { %>
+        <div class="panel" style="padding-top:20px;padding-left:15px;padding-bottom:3px;padding-right:15px;margin-bottom:2%;">
+          <div class="container">
+            <div>
+              <div class="pic" style="float:right;margin-right:5%;">
+                <img src="<%= parsedData['results'][i].media.imageUrl %>" alt="News Image" width="300px" height="200px">
+              </div>
+              <h2><b><%= parsedData["results"][i].title %></b></h2> 
+              <h3><strong>Colorway:</strong> <%= parsedData["results"][i].colorway %></h3>
+              <h3><strong>Release Date:</strong> <%= parsedData["results"][i].releaseDate %></h3>
+              <h3><strong>Gender / Type:</strong> <%= (parsedData["results"][i].gender).charAt(0).toUpperCase() + (parsedData["results"][i].gender).slice(1) %></h3>
+              <h3><strong>Retail Price:</strong> $<%= parsedData["results"][i].retailPrice %>.00</h3>
+            </div>
+          </div>
+        </div>
+        <% } %>
+    <% } %>
+
+    <% for (var i = 0; i < 100; i++){ %>
+        <% if (!parsedData['results'][i].media.imageUrl) { %>
+            <div class="panel" style="padding-top:20px;padding-left:15px;padding-bottom:3px;padding-right:15px;margin-bottom:2%;">
+                <div class="container">
+                    <div>
+                    <div class="pic" style="float:right;margin-right:5%;">
+                        <img src="/styles/random_shoe.jpg" alt="News Image" width="300px" height="200px">
+                    </div>
+                    <h2><b><%= parsedData["results"][i].title %></b></h2> 
+                    <h3><strong>Colorway:</strong> <%= parsedData["results"][i].colorway %></h3>
+                    <h3><strong>Release Date:</strong> <%= parsedData["results"][i].releaseDate %></h3>
+                    <h3><strong>Gender / Type:</strong> <%= (parsedData["results"][i].gender).charAt(0).toUpperCase() + (parsedData["results"][i].gender).slice(1) %></h3>
+                    <h3><strong>Retail Price:</strong> $<%= parsedData["results"][i].retailPrice %>.00</h3>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+    <% } %>
+</div>
+<%- include("./partials/footer") %>
