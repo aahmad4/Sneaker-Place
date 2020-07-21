@@ -1,31 +1,30 @@
 body {
   font-family: Roboto, sans-serif;
-  background-color: #EDF2F7;
+  background-color: #edf2f7;
 }
 
-*:focus{
+*:focus {
   outline: none;
 }
 
 .btn-success {
-	background-color: rgb(8, 160, 92);
+  background-color: rgb(8, 160, 92);
 }
 
 .navbar-default {
-  background-color: rgb(8, 160, 92)!important;
-  border-color: rgb(8, 160, 92)!important;
-  border-radius:0px;
-
+  background-color: rgb(8, 160, 92) !important;
+  border-color: rgb(8, 160, 92) !important;
+  border-radius: 0px;
 }
 
 .thumbnail img {
-	width: 100%;
+  width: 100%;
 }
 
 .thumbnail .caption-full {
-	padding: 9px;
+  padding: 9px;
 }
 
 #delete-form {
-	display: inline;
+  display: inline;
 }

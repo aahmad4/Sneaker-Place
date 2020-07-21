@@ -15,40 +15,37 @@
 		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 	</head>
 	<body>
-	<nav class="navbar navbar-default" style="padding-top:1%;padding-bottom:1%;font-size:20px;">
-	<div class="container" style="">
-	<div class="container-fluid" style="">
-		<div class="navbar-header" style="">
-			<a class="navbar-brand" href="/" style="color:white;font-size:25px;"><strong>XtockS</strong></a>
-		</div>
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="navbar-nav navbar-right nav" style="">
-				<% if (!currentUser) { %>
-					<li><a href="/feed" style="color:white;">Feed</a></li>
-					<li><a href="/login" style="color:white;">Login</a></li>	
-					<li><a href="/register" style="color:white;">Sign Up</a></li>
-				<% } else { %>
-					<li><a href="#" style="color:white;">Signed In As <%=currentUser.username%></a></li>
-					<li><a href="/feed" style="color:white;">Feed</a></li>
-					<li><a href="/logout" style="color:white;">Logout</a></li>
-				<% } %>
-			</ul>
-		</div>
-	</div>
-	</div>
-	</nav>
-	<div class="container">
-		<% if (error && error.length > 0){ %>
-			<div class="alert alert-danger" role="alert">
-				<%= error %>
+		<nav class="navbar navbar-default" style="padding-top:.5%;padding-bottom:.5%;font-size:17px;">
+			<div class="container" style="">
+				<div class="container-fluid" style="">
+					<div class="navbar-header" style="">
+						<a class="navbar-brand" href="/" style="color:white;font-size:22px;"><strong>XtockS</strong></a>
+					</div>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="navbar-nav navbar-right nav" style="">
+							<% if (!currentUser) { %>
+								<li><a href="/feed" style="color:white;">Feed</a></li>
+								<li><a href="/login" style="color:white;">Login</a></li>	
+								<li><a href="/register" style="color:white;">Sign Up</a></li>
+							<% } else { %>
+								<li><a href="#" style="color:white;">Signed In As <%=currentUser.username%></a></li>
+								<li><a href="/feed" style="color:white;">Feed</a></li>
+								<li><a href="/logout" style="color:white;">Logout</a></li>
+							<% } %>
+						</ul>
+					</div>
+				</div>
 			</div>
-		<% } %>
-		<% if (success && success.length > 0){ %>
-			<div class="alert alert-success" role="alert">
-				<%= success %>
-			</div>
-		<% } %>
-	</div>
-		
-		
-		
+		</nav>
+		<div class="container">
+			<% if (error && error.length > 0){ %>
+				<div class="alert alert-danger" role="alert">
+					<%= error %>
+				</div>
+			<% } %>
+			<% if (success && success.length > 0){ %>
+				<div class="alert alert-success" role="alert">
+					<%= success %>
+				</div>
+			<% } %>
+		</div>

@@ -9,12 +9,16 @@ router.get("/", function (req, res) {
 });
 
 router.get("/feed", function (req, res) {
-	request('https://api.thesneakerdatabase.com/v1/sneakers?limit=100', function(error, response, body){
-	if (!error && response.statusCode == 200) {
-		var parsedData = JSON.parse(body);
-		res.render("feed", {parsedData:parsedData});
-	}
-	});	
+  request("https://api.thesneakerdatabase.com/v1/sneakers?limit=100", function (
+    error,
+    response,
+    body
+  ) {
+    if (!error && response.statusCode == 200) {
+      var parsedData = JSON.parse(body);
+      res.render("feed", { parsedData: parsedData });
+    }
+  });
 });
 
 // Show register form

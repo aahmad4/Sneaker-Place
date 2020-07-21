@@ -1,40 +1,36 @@
 <%- include("../partials/header") %>
-
-<div class="container">
-	<header class="jumbotron" style="background-color:lightgrey ;color:black;">
-		<div class="container">
-			<% if (currentUser) { %>
-				<h1><%= currentUser.username %>, let's look at some shoes</h1>
-			<% } else { %>
-				<h1>Welcome to XtockS</h1>
-			<% } %>
-			<p>Buy, Sell, or Trade Shoes at STEM</p>
-			<p><a class="btn-success btn-lg" href="/shoes/new">Post a New Shoe</a></p>
+	<div class="container">
+		<header class="jumbotron" style="background-color:lightgrey ;color:black;">
+			<div class="container">
+				<% if (currentUser) { %>
+					<h1><%= currentUser.username %>, let's look at some shoes</h1>
+				<% } else { %>
+					<h1>Welcome to XtockS</h1>
+				<% } %>
+				<p>Buy, Sell, or Trade Shoes at STEM</p>
+				<p><a class="btn-success btn-lg" href="/shoes/new">Post a New Shoe</a></p>
+			</div>
+		</header>
+		<div class="row">
+			<div class="col-lg-12">
+				<h3>Top Shoes</h3>
+			</div>
 		</div>
-	</header>
-	
-	<div class="row">
-		<div class="col-lg-12">
-			<h3>Top Shoes</h3>
+		<div class="row text-center" style="display:flex; flex-wrap:wrap;">
+			<% shoes.reverse().forEach(function(shoe){ %>
+				<div class="col-md-3 col-sm-6">
+					<div class="thumbnail">
+						<img src="<%= shoe.image %>">
+						<div class="caption">
+							<h4><strong><%= shoe.name %></strong></h4>
+							<h4>$<%= shoe.price %></h4>
+						</div>
+						<p>
+							<a href="/shoes/<%= shoe._id %>" class="btn btn-success">More Info</a>
+						</p>
+					</div>				
+				</div>	
+			<% }) %>
 		</div>
 	</div>
-	
-	<div class="row text-center" style="display:flex; flex-wrap:wrap;">
-		<% shoes.reverse().forEach(function(shoe){ %>
-		<div class="col-md-3 col-sm-6">
-			<div class="thumbnail">
-				<img src="<%= shoe.image %>">
-				<div class="caption">
-					<h4><strong><%= shoe.name %></strong></h4>
-					<h4>$<%= shoe.price %></h4>
-				</div>
-				<p>
-					<a href="/shoes/<%= shoe._id %>" class="btn btn-success">More Info</a>
-				</p>
-			</div>				
-		</div>	
-		<% }) %>
-	</div>
-</div>
-
 <%- include("../partials/footer") %>
