@@ -18,9 +18,10 @@ var commentRoutes = require("./routes/comments"),
 const session = require("express-session"),
   MongoStore = require("connect-mongo")(session);
 
+var url = process.env.DATABASEURL;
 // mongoose.connect("mongodb://localhost:27017/xtocks", {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.connect(
-  "mongodb+srv://aahmad4:aahmad4@cluster0.mfoxo.mongodb.net/xtocks?retryWrites=true&w=majority",
+  url,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
