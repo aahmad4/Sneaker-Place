@@ -1,4 +1,4 @@
-# StockX Clone 
+# StockX Clone  
 
 This is a personal project I created as a platform for my friends, family, and peers at school to have a custom platform to buy, sell, and trade sneakers. The app allows users to register accounts, login, and post shoes for others to browse and buy. I also used The Sneaker Database API to fetch a list of upcoming sneaker releases and showing them on a designated page.  
 
