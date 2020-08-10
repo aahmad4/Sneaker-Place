@@ -8,7 +8,7 @@ The app is currently deployed to heroku, you can check it out here: https://xtoc
 
 Screenshots Coming Soon 
 
-## Features
+## Features 
 
 * Authentication:
   * User login with username and password
