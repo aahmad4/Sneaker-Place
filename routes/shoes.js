@@ -1,6 +1,9 @@
 var express = require("express");
 var router = express.Router();
 var Shoe = require("../models/shoe");
+const stripe = require("stripe")(process.env.PRIVATEKEY);
+
+router.use(express.json());
 
 router.get("/", function (req, res) {
   //  Get all shoes from database
@@ -91,6 +94,23 @@ router.delete("/:id", checkOwnership, function (req, res) {
   });
 });
 
+router.post("/purchase", function (req, res) {
+  stripe.charges
+    .create({
+      amount: req.body.total,
+      source: req.body.stripeTokenId,
+      currency: "usd",
+    })
+    .then(function () {
+      console.log("Charge Successful");
+      res.json({ message: "Successfully purchased item" });
+    })
+    .catch(function () {
+      console.log("Charge failure");
+      res.status(500).end();
+    });
+});
+
 // Middleware
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
@@ -107,7 +127,7 @@ function checkOwnership(req, res, next) {
         req.flash("error", "Item not found!");
         res.redirect("back");
       } else {
-        // Does user own campground
+        // Does user own shoe
         if (foundShoe.author.id.equals(req.user._id)) {
           next();
         } else {
