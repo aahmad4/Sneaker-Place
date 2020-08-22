@@ -1,5 +1,6 @@
 var stripeHandler = StripeCheckout.configure({
-  key: process.env.PUBLICKEY,
+  key:
+    "pk_test_51H4HxfEzvu7bwBd3AqPbAwjJNEeaRrK6hYyGkYkAQXQLoz9SakpgFOpSJHAdfRJSDjk1rUJVsFURfqCLkLTYBjMa002OUbnnwW",
   locale: "auto",
   token: function (token) {
     fetch("/shoes/purchase", {
