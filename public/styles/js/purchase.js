@@ -38,5 +38,8 @@ function purchaseClicked() {
     parseFloat(priceElement.innerText.replace("Purchase For $", "")) * 100;
   stripeHandler.open({
     amount: price,
+    billingAddress: true,
+    name: 'XtockS',
+    description: document.getElementsByClassName("shoeName")[0].innerText,
   });
 }
