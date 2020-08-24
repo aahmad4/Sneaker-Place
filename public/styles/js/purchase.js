@@ -41,5 +41,6 @@ function purchaseClicked() {
     billingAddress: true,
     name: 'XtockS',
     description: document.getElementsByClassName("shoeName")[0].innerText,
+    image: 'https://pbs.twimg.com/profile_images/684418269306945536/HDodeG76_400x400.jpg',
   });
 }
