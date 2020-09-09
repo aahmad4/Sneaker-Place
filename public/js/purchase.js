@@ -35,7 +35,7 @@ var stripeHandler = StripeCheckout.configure({
 function purchaseClicked() {
   var priceElement = document.getElementsByClassName("purchase")[0];
   var price =
-    parseFloat(priceElement.innerText.replace("Purchase For $", "")) * 100;
+    parseFloat(priceElement.innerText.replace("$", "")) * 100;
   stripeHandler.open({
     amount: price,
     billingAddress: true,
