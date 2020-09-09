@@ -16,7 +16,7 @@ var stripeHandler = StripeCheckout.configure({
           parseFloat(
             document
               .getElementsByClassName("purchase")[0]
-              .innerText.replace("Purchase For $", "")
+              .innerText.replace("$", "")
           ) * 100,
       }),
     })
