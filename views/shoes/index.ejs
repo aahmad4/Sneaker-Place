@@ -1,36 +1,59 @@
 <%- include("../partials/header") %>
+<main class="my-5">
 	<div class="container">
-		<header class="jumbotron" style="background-color:lightgrey ;color:black;">
-			<div class="container">
+		<section style="background-color: #d3d3d3;">
+			<div id="intro" class="p-5 text-center shadow-5 rounded mb-5" style="background-color: #d3d3d3;">
 				<% if (currentUser) { %>
-					<h1><%= currentUser.username %>, let's look at some shoes</h1>
+				<h1 class="mb-3 h2"><%= currentUser.username %>, let's look at some shoes</h1>
 				<% } else { %>
-					<h1>Welcome to XtockS</h1>
+				<h1 class="mb-3 h2">Welcome to XtockS</h1>
 				<% } %>
-				<p>Buy, Sell, or Trade Shoes at STEM</p>
-				<p><a class="btn-success btn-lg" href="/shoes/new">Post a New Shoe</a></p>
+				<p class="mb-3">Buy, Sell, or Trade Shoes at STEM</p>
+				<a class="btn btn-success m-2" href="/shoes/new" role="button">Post a New Shoe</a>
+				<a class="btn btn-success m-2" href="/feed" role="button">Upcoming Releases</a>
 			</div>
-		</header>
-		<div class="row">
-			<div class="col-lg-12">
-				<h3>Top Shoes</h3>
+		</section>
+
+		<section class="text-center">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 mb-5">
+					<h4><strong style="">Most Recent Shoe Submissions</strong></h4>
+				</div>
+				<div class="col-lg-6 col-md-6 mb-5">
+					<form class="d-flex input-group w-auto">
+						<input type="search" class="form-control" placeholder="Shoe Name" aria-label="Search" />
+						<button class="btn btn-outline-success" type="button" data-ripple-color="dark">
+							Search
+						</button>
+					</form>
+				</div>
 			</div>
-		</div>
-		<div class="row text-center" style="display:flex; flex-wrap:wrap;">
-			<% shoes.reverse().forEach(function(shoe){ %>
-				<div class="col-md-3 col-sm-6">
-					<div class="thumbnail">
-						<img src="<%= shoe.image %>">
-						<div class="caption">
-							<h4><strong><%= shoe.name %></strong></h4>
-							<h4>$<%= shoe.price %></h4>
+
+			<div class="row" style="display:flex; flex-wrap:wrap;">
+				<% shoes.reverse().forEach(function(shoe){ %>
+				<div class="col-lg-4 col-md-6 mb-4">
+					<div class="card" style="margin-bottom:25px;">
+						<div class="bg-image hover-overlay ripple" data-ripple-color="light">
+							<img src="<%= shoe.image %>" class="img-fluid"
+								style="height:300px;width:300px;object-fit:scale-down;" />
+							<a href="/shoes/<%= shoe._id %>">
+								<div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+							</a>
 						</div>
-						<p>
+						<div class="card-body">
+							<h5 class="card-title">
+								<%= shoe.name %>
+							</h5>
+							<p class="card-text">
+								$<%= shoe.price %>
+							</p>
 							<a href="/shoes/<%= shoe._id %>" class="btn btn-success">More Info</a>
-						</p>
-					</div>				
-				</div>	
-			<% }) %>
-		</div>
+						</div>
+					</div>
+				</div>
+				<% }) %>
+			</div>
+		</section>
 	</div>
+</main>
 <%- include("../partials/footer") %>

@@ -11,10 +11,10 @@ body {
   background-color: rgb(8, 160, 92);
 }
 
-.navbar-default {
+.navbar-expand-lg {
   background-color: rgb(8, 160, 92) !important;
   border-color: rgb(8, 160, 92) !important;
-  border-radius: 0px;
+  border-radius: 0px !important;
 }
 
 .thumbnail img {
@@ -27,4 +27,8 @@ body {
 
 #delete-form {
   display: inline;
+}
+
+#intro {
+  margin-top: 58px;
 }
