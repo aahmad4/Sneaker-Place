@@ -55,6 +55,9 @@
                             <p>
                                 <strong>Retail Price:</strong> $<%= parsedData["results"][i].retailPrice %>.00
                             </p>
+                            <p>
+                                <strong>Gender:</strong> <%= (parsedData["results"][i].gender).charAt(0).toUpperCase() + (parsedData["results"][i].gender).slice(1) %>
+                            </p>
                             <button type="button" class="btn btn-primary">Read</button>
                         </div>
                     </div>
