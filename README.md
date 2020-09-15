@@ -5,7 +5,7 @@ This is a personal project I created as a platform for my friends, family, and p
 The app is currently deployed to heroku, you can check it out here: https://xtocks.herokuapp.com/  
 
 ## Screenshots Of Core Pages 
-
+ 
 Screenshots Coming Soon 
 
 ## Features 
