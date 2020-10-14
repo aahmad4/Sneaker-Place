@@ -79,6 +79,9 @@ yarn install
 ```
 
 #### Usage
+```
+cd StockX-Clone
+```
 
 ```sh
 node app.js
