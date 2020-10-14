@@ -1,8 +1,12 @@
-# StockX Clone  
-  
-This is a personal project I created as a platform for my friends, family, and peers at school to have a custom platform to buy, sell, and trade sneakers. The app allows users to register accounts, login, and post shoes for others to browse and buy. I also used The Sneaker Database API to fetch a list of upcoming sneaker releases and showing them on a designated page.   
+<h1 align="center">StockX Clone</h1> 
 
-The app is currently deployed to heroku, you can check it out here: https://xtocks.herokuapp.com/  
+<p align="center">
+This is a personal project I created as a platform for my friends, family, and peers at school to have a custom platform to buy, sell, and trade sneakers. The app allows users to register accounts, login, and post shoes for others to browse and buy. I also used The Sneaker Database API to fetch a list of upcoming sneaker releases and showing them on a designated page.   
+</p>
+
+<p align="center">
+A link to an online demo version can be found here: <a href="https://xtocks.herokuapp.com" target="_blank">xtocks.herokuapp.com</a>
+</p>
 
 ## Screenshots Of Core Pages 
  
@@ -52,13 +56,15 @@ Screenshots Coming Soon
 * [Ejs](http://ejs.co/)
 * [Bootstrap](https://getbootstrap.com/docs/3.3/)
 
-## Clone
+## Setup
+
+#### Clone
 
 ```sh
 git clone https://github.com/aahmad4/StockX-Clone
 ```
 
-## Installation
+#### Installation
 
 Use the package manager [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) to install the required packages.
 
@@ -72,7 +78,7 @@ or
 yarn install
 ```
 
-## Usage
+#### Usage
 
 ```sh
 node app.js
