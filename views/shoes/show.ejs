@@ -68,18 +68,20 @@
 			</div>
 		</nav>
 	</header>
+	<% if (error && error.length > 0){ %>
 	<div class="container">
-		<% if (error && error.length > 0){ %>
-		<div class="alert alert-danger" role="alert">
+		<div class="alert alert-danger" role="alert" style="text-align: center;">
 			<%= error %>
 		</div>
-		<% } %>
-		<% if (success && success.length > 0){ %>
-		<div class="alert alert-success" role="alert">
+	</div>
+	<% } %>
+	<% if (success && success.length > 0){ %>
+	<div class="container">
+		<div class="alert alert-success" role="alert" style="text-align: center;">
 			<%= success %>
 		</div>
-		<% } %>
 	</div>
+	<% } %>
 	<main class="mt-4 mb-5">
 		<div class="container">
 			<section class="mb-3">

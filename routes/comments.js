@@ -1,11 +1,40 @@
-var express = require("express");
-var router = express.Router({ mergeParams: true });
-var Shoe = require("../models/shoe");
-var Comment = require("../models/comment");
+const express = require("express"),
+  router = express.Router({ mergeParams: true }),
+  Shoe = require("../models/shoe"),
+  Comment = require("../models/comment");
 
-router.get("/new", isLoggedIn, function (req, res) {
+const isLoggedIn = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  req.flash("error", "Please Login First!");
+  res.redirect("/login");
+};
+
+const checkCommentOwnership = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    Comment.findById(req.params.comment_id, (err, foundComment) => {
+      if (err) {
+        res.redirect("back");
+      } else {
+        // Does user own comment
+        if (foundComment.author.id.equals(req.user._id)) {
+          next();
+        } else {
+          req.flash("error", "You don't have permission to do that!");
+          res.redirect("back");
+        }
+      }
+    });
+  } else {
+    req.flash("error", "Must be logged in!");
+    res.redirect("back");
+  }
+};
+
+router.get("/new", isLoggedIn, (req, res) => {
   // Find shoe by ID
-  Shoe.findById(req.params.id, function (err, shoe) {
+  Shoe.findById(req.params.id, (err, shoe) => {
     if (err) {
       console.log(err);
     } else {
@@ -14,14 +43,14 @@ router.get("/new", isLoggedIn, function (req, res) {
   });
 });
 
-router.post("/", isLoggedIn, function (req, res) {
+router.post("/", isLoggedIn, (req, res) => {
   // lookup shoe by ID
-  Shoe.findById(req.params.id, function (err, shoe) {
+  Shoe.findById(req.params.id, (err, shoe) => {
     if (err) {
       console.log(err);
       res.redirect("/shoes");
     } else {
-      Comment.create(req.body.comment, function (err, comment) {
+      Comment.create(req.body.comment, (err, comment) => {
         if (err) {
           console.log(err);
         } else {
@@ -42,8 +71,8 @@ router.post("/", isLoggedIn, function (req, res) {
 });
 
 // Comments edit route
-router.get("/:comment_id/edit", checkCommentOwnership, function (req, res) {
-  Comment.findById(req.params.comment_id, function (err, foundComment) {
+router.get("/:comment_id/edit", checkCommentOwnership, (req, res) => {
+  Comment.findById(req.params.comment_id, (err, foundComment) => {
     if (err) {
       res.redirect("back");
     } else {
@@ -56,21 +85,22 @@ router.get("/:comment_id/edit", checkCommentOwnership, function (req, res) {
 });
 
 // Comment update
-router.put("/:comment_id", checkCommentOwnership, function (req, res) {
-  Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function (
-    err,
-    updatedComment
-  ) {
-    if (err) {
-      res.redirect("back");
-    } else {
-      res.redirect("/shoes/" + req.params.id);
+router.put("/:comment_id", checkCommentOwnership, (req, res) => {
+  Comment.findByIdAndUpdate(
+    req.params.comment_id,
+    req.body.comment,
+    (err, updatedComment) => {
+      if (err) {
+        res.redirect("back");
+      } else {
+        res.redirect("/shoes/" + req.params.id);
+      }
     }
-  });
+  );
 });
 
-router.delete("/:comment_id", checkCommentOwnership, function (req, res) {
-  Comment.findByIdAndRemove(req.params.comment_id, function (err) {
+router.delete("/:comment_id", checkCommentOwnership, (req, res) => {
+  Comment.findByIdAndRemove(req.params.comment_id, (err) => {
     if (err) {
       res.redirect("back");
     } else {
@@ -79,34 +109,5 @@ router.delete("/:comment_id", checkCommentOwnership, function (req, res) {
     }
   });
 });
-
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  req.flash("error", "Please Login First!");
-  res.redirect("/login");
-}
-
-function checkCommentOwnership(req, res, next) {
-  if (req.isAuthenticated()) {
-    Comment.findById(req.params.comment_id, function (err, foundComment) {
-      if (err) {
-        res.redirect("back");
-      } else {
-        // Does user own comment
-        if (foundComment.author.id.equals(req.user._id)) {
-          next();
-        } else {
-          req.flash("error", "You don't have permission to do that!");
-          res.redirect("back");
-        }
-      }
-    });
-  } else {
-    req.flash("error", "Must be logged in!");
-    res.redirect("back");
-  }
-}
 
 module.exports = router;

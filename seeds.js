@@ -1,8 +1,8 @@
-var mongoose = require("mongoose");
-var Shoe = require("./models/shoe");
-var Comment = require("./models/comment");
+const mongoose = require("mongoose"),
+  Shoe = require("./models/shoe"),
+  Comment = require("./models/comment");
 
-var data = [
+const data = [
   {
     name: "Cloud's Rest",
     image: "https://farm4.staticflickr.com/3795/10131087094_c1c0a1c859.jpg",
@@ -23,21 +23,21 @@ var data = [
   },
 ];
 
-function seedDB() {
+const seedDB = () => {
   //Remove all shoes
-  Shoe.deleteMany({}, function (err) {
+  Shoe.deleteMany({}, (err) => {
     if (err) {
       console.log(err);
     }
     console.log("removed shoes!");
-    Comment.deleteMany({}, function (err) {
+    Comment.deleteMany({}, (err) => {
       if (err) {
         console.log(err);
       }
       console.log("removed comments!");
       // add a few shoes
-      data.forEach(function (seed) {
-        Shoe.create(seed, function (err, shoe) {
+      data.forEach((seed) => {
+        Shoe.create(seed, (err, shoe) => {
           if (err) {
             console.log(err);
           } else {
@@ -48,7 +48,7 @@ function seedDB() {
                 text: "This place is great, but I wish there was internet",
                 author: "Homer",
               },
-              function (err, comment) {
+              (err, comment) => {
                 if (err) {
                   console.log(err);
                 } else {
@@ -63,7 +63,6 @@ function seedDB() {
       });
     });
   });
-  //add a few comments
-}
+};
 
 module.exports = seedDB;

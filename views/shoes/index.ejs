@@ -1,4 +1,18 @@
 <%- include("../partials/header") %>
+<% if (noMatch !== undefined) { %>
+<div class="container">
+	<div class="alert alert-danger" role="alert" style="text-align: center;">
+		<%= noMatch %>
+	</div>
+</div>
+<% } %>
+<% if (yesMatch !== undefined) { %>
+<div class="container">
+	<div class="alert alert-success" role="alert" style="text-align: center;">
+		We found <%= yesMatch %> results matching that search!
+	</div>
+</div>
+<% } %>
 <main class="my-5">
 	<div class="container">
 		<section style="background-color: #d3d3d3;">
@@ -20,9 +34,10 @@
 					<h4><strong style="">Most Recent Shoe Submissions</strong></h4>
 				</div>
 				<div class="col-lg-6 col-md-6 mb-5">
-					<form class="d-flex input-group w-auto">
-						<input type="search" class="form-control" placeholder="Shoe Name" aria-label="Search" />
-						<button class="btn btn-outline-success" type="button" data-ripple-color="dark">
+					<form class="d-flex input-group w-auto" action="/shoes" method="GET">
+						<input type="text" name="search" class="form-control" placeholder="Shoe Name"
+							aria-label="Search" />
+						<button class="btn btn-outline-success" type="submit" data-ripple-color="dark">
 							Search
 						</button>
 					</form>
