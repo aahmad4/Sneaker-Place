@@ -8,60 +8,25 @@ This is a personal project I created as a platform for my friends, family, and p
 A link to an online demo version can be found here: <a href="https://xtocks.herokuapp.com" target="_blank">xtocks.herokuapp.com</a>
 </p>
 
-## Screenshots Of Core Pages 
- 
-Screenshots Coming Soon 
+## Summary
 
-## Features 
+  - [Getting Started](#getting-started)
+  - [Built With](#built-with)
+  - [Contributing](#contributing)
+  - [License](#license)
 
-* Authentication:
-  * User login with username and password
-  * Admin sign-up with admin code
+## Getting Started
 
-* Authorization:
-  * One cannot manage posts and view user profile without being authenticated
-  * One cannot edit or delete posts and comments created by other users
-  * Admin can manage all posts and comments
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-* Manage shoe posts with basic functionalities:
-  * Create, edit and delete posts and comments
-  * Upload shoe photos  
-  * Search existing campgrounds
+### Setup
 
-* Manage user account with basic functionalities:
-  * Profile page setup with sign-up
-
-* Flash messages responding to users' interaction with the app
-
-* Responsive web design
-
-## Built With
-
-* [Node.js](https://nodejs.org/)
-* [Express](https://expressjs.com/)
-* [MongoDB](https://www.mongodb.com/)
-* [Mongoose](http://mongoosejs.com/)
-* [Async](http://caolan.github.io/async/)
-* [Crypto](https://nodejs.org/api/crypto.html#crypto_crypto)
-* [Helmet](https://helmetjs.github.io/)
-* [Passport](http://www.passportjs.org/)
-* [Passport-local](https://github.com/jaredhanson/passport-local#passport-local)
-* [Express-session](https://github.com/expressjs/session#express-session)
-* [Method-override](https://github.com/expressjs/method-override#method-override)
-* [Nodemailer](https://nodemailer.com/about/)
-* [Moment](https://momentjs.com/)
-* [Cloudinary](https://cloudinary.com/)
-* [Geocoder](https://github.com/wyattdanger/geocoder#geocoder)
-* [Connect-flash](https://github.com/jaredhanson/connect-flash#connect-flash)
-* [Ejs](http://ejs.co/)
-* [Bootstrap](https://getbootstrap.com/docs/3.3/)
-
-## Setup
+A step by step series of examples that tell you how to get a development env running.
 
 #### Clone
 
 ```sh
-git clone https://github.com/aahmad4/StockX-Clone
+$ git clone https://github.com/aahmad4/StockX-Clone
 ```
 
 #### Installation
@@ -69,32 +34,39 @@ git clone https://github.com/aahmad4/StockX-Clone
 Use the package manager [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) to install the required packages.
 
 ```sh
-npm install
+$ npm install
 ```
 
 or
 
 ```sh
-yarn install
+$ yarn install
 ```
 
 #### Usage
+
 ```
-cd StockX-Clone
+$ node app.js
 ```
 
-```sh
-node app.js
-```
 
-Then go to
+## Built With
 
-```sh
-localhost:8000
-```
+* [Node.js](https://nodejs.org/) - JavaScript runtime engine
+* [Express](https://expressjs.com/) - Back-end web application framework
+* [MongoDB](https://www.mongodb.com/) - Database
+* [Passport](http://www.passportjs.org/) - Unobtrusive authentication for Node.js
+* [Ejs](http://ejs.co/) - Embedded JavaScript templates
+* [The Sneaker Database API](https://thesneakerdatabase.com/api/) - Helpful third-party API for latest sneaker releases
+* [Stripe](https://stripe.com/) - Online payment service
+* [Heroku](https://www.heroku.com/) - Online cloud platform
 
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
