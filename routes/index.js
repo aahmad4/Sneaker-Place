@@ -17,15 +17,23 @@ router.get("/", (req, res) => {
 });
 
 router.get("/feed", (req, res) => {
-  request(
-    "https://api.thesneakerdatabase.com/v1/sneakers?limit=100",
-    (error, response, body) => {
-      if (!error && response.statusCode == 200) {
-        const parsedData = JSON.parse(body);
-        res.render("feed", { parsedData: parsedData });
-      }
+  const options = {
+    method: "GET",
+    url: "https://v1-sneakers.p.rapidapi.com/v1/sneakers",
+    qs: { limit: "100" },
+    headers: {
+      "x-rapidapi-key": process.env.RAPIDAPIKEY,
+      "x-rapidapi-host": "v1-sneakers.p.rapidapi.com",
+      useQueryString: true,
+    },
+  };
+
+  request(options, (error, response, body) => {
+    if (!error && response.statusCode == 200) {
+      const parsedData = JSON.parse(body);
+      res.render("feed", { parsedData: parsedData });
     }
-  );
+  });
 });
 
 // Show register form
