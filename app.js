@@ -18,8 +18,8 @@ const commentRoutes = require("./routes/comments"),
 const session = require("express-session"),
   MongoStore = require("connect-mongo")(session);
 
-const url = process.env.DATABASEURL;
-// mongoose.connect("mongodb://localhost:27017/xtocks", {useNewUrlParser: true, useUnifiedTopology: true});
+const url = process.env.DATABASEURL || "mongodb://localhost:27017/xtocks";
+
 mongoose.connect(url, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
