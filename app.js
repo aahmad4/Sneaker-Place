@@ -13,15 +13,9 @@ import shoeRoutes from "./routes/shoes.js";
 import indexRoutes from "./routes/index.js";
 
 import session from "express-session";
+import connectDB from "./config/db.js";
 
-const url = process.env.DATABASEURL || "mongodb://localhost:27017/xtocks";
-
-mongoose.connect(url, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-});
+connectDB();
 
 const app = express();
 
