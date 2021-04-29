@@ -1,6 +1,6 @@
-const mongoose = require("mongoose"),
-  Shoe = require("./models/shoe"),
-  Comment = require("./models/comment");
+import mongoose from "mongoose";
+import Shoe from "./models/shoe.js";
+import Comment from "./models/comment.js";
 
 const data = [
   {
@@ -65,4 +65,4 @@ const seedDB = () => {
   });
 };
 
-module.exports = seedDB;
+export default seedDB;

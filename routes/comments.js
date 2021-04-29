@@ -1,7 +1,7 @@
-const express = require("express"),
-  router = express.Router({ mergeParams: true }),
-  Shoe = require("../models/shoe"),
-  Comment = require("../models/comment");
+import express from "express";
+const router = express.Router({ mergeParams: true });
+import Shoe from "../models/shoe.js";
+import Comment from "../models/comment.js";
 
 const isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -110,4 +110,4 @@ router.delete("/:comment_id", checkCommentOwnership, (req, res) => {
   });
 });
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const shoeSchema = new mongoose.Schema({
   name: String,
@@ -20,4 +20,6 @@ const shoeSchema = new mongoose.Schema({
   ],
 });
 
-module.exports = mongoose.model("Shoe", shoeSchema);
+const Shoe = mongoose.model("Shoe", shoeSchema);
+
+export default Shoe;

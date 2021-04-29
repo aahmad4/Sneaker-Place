@@ -1,22 +1,24 @@
-const express = require("express"),
-  app = express(),
-  bodyParser = require("body-parser"),
-  mongoose = require("mongoose"),
-  Shoe = require("./models/shoe"),
-  Comment = require("./models/comment"),
-  User = require("./models/user"),
-  seedDB = require("./seeds"),
-  passport = require("passport"),
-  LocalStrategy = require("passport-local"),
-  methodOverride = require("method-override"),
-  flash = require("connect-flash");
+import express from "express";
+const app = express();
+import bodyParser from "body-parser";
+import mongoose from "mongoose";
+import Shoe from "./models/shoe.js";
+import Comment from "./models/comment.js";
+import User from "./models/user.js";
+import seedDB from "./seeds.js";
+import passport from "passport";
+import LocalStrategy from "passport-local";
+import methodOverride from "method-override";
+import flash from "connect-flash";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
-const commentRoutes = require("./routes/comments"),
-  shoeRoutes = require("./routes/shoes"),
-  indexRoutes = require("./routes/index");
+import commentRoutes from "./routes/comments.js";
+import shoeRoutes from "./routes/shoes.js";
+import indexRoutes from "./routes/index.js";
 
-const session = require("express-session"),
-  MongoStore = require("connect-mongo")(session);
+import session from "express-session";
+import MongoStore from "connect-mongo";
 
 const url = process.env.DATABASEURL || "mongodb://localhost:27017/xtocks";
 
@@ -28,6 +30,8 @@ mongoose.connect(url, {
 });
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
@@ -36,7 +40,7 @@ app.use(flash());
 
 // Passport Configuration
 app.use(
-  require("express-session")({
+  session({
     secret: "Something random lol",
     resave: false,
     saveUninitialized: false,
@@ -57,7 +61,6 @@ app.use((req, res, next) => {
 });
 
 app.use("/", indexRoutes);
-// Appends /shoes infront of all shoe routes
 app.use("/shoes", shoeRoutes);
 app.use("/shoes/:id/comments", commentRoutes);
 

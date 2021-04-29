@@ -1,8 +1,8 @@
-const express = require("express"),
-  router = express.Router(),
-  passport = require("passport"),
-  request = require("request"),
-  User = require("../models/user");
+import express from "express";
+const router = express.Router();
+import passport from "passport";
+import request from "request";
+import User from "../models/user.js";
 
 const isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -78,4 +78,4 @@ router.get("/logout", (req, res) => {
   res.redirect("/shoes");
 });
 
-module.exports = router;
+export default router;

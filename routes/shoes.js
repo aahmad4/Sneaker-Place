@@ -1,8 +1,10 @@
-const express = require("express"),
-  router = express.Router(),
-  Shoe = require("../models/shoe");
+import express from "express";
+const router = express.Router({ mergeParams: true });
+import Shoe from "../models/shoe.js";
 
-const stripe = require("stripe")(process.env.PRIVATEKEY);
+import Stripe from "stripe";
+
+const stripe = new Stripe(process.env.PRIVATEKEY);
 
 router.use(express.json());
 
@@ -169,4 +171,4 @@ router.post("/purchase", (req, res) => {
     });
 });
 
-module.exports = router;
+export default router;
