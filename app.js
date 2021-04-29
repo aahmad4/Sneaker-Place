@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-import User from "./models/user.js";
+import User from "./models/user.model.js";
 import passport from "passport";
 import LocalStrategy from "passport-local";
 import methodOverride from "method-override";

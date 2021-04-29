@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router({ mergeParams: true });
-import Shoe from "../models/shoe.js";
-import Comment from "../models/comment.js";
+import Shoe from "../models/shoe.model.js";
+import Comment from "../models/comment.model.js";
 
 const isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {

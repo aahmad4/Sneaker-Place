@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router({ mergeParams: true });
-import Shoe from "../models/shoe.js";
+import Shoe from "../models/shoe.model.js";
 import Stripe from "stripe";
 import dotenv from "dotenv";
 
