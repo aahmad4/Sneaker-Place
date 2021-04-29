@@ -1,10 +1,15 @@
 import mongoose from "mongoose";
 import passportLocalMongoose from "passport-local-mongoose";
 
-const UserSchema = new mongoose.Schema({
-  username: String,
-  password: String,
-});
+const UserSchema = new mongoose.Schema(
+  {
+    username: String,
+    password: String,
+  },
+  {
+    timestamps: true,
+  }
+);
 
 UserSchema.plugin(passportLocalMongoose);
 
