@@ -41,7 +41,11 @@ router.get("/feed", (req, res) => {
 
 // Show register form
 router.get("/register", (req, res) => {
-  res.render("register");
+  if (req.isAuthenticated()) {
+    res.redirect("/shoes");
+  } else {
+    res.render("register");
+  }
 });
 
 // Sign Up Logic
@@ -61,7 +65,11 @@ router.post("/register", (req, res) => {
 
 // Show login form
 router.get("/login", (req, res) => {
-  res.render("login");
+  if (req.isAuthenticated()) {
+    res.redirect("/shoes");
+  } else {
+    res.render("login");
+  }
 });
 
 // Handle login logic
