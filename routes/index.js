@@ -3,6 +3,9 @@ const router = express.Router();
 import passport from "passport";
 import request from "request";
 import User from "../models/user.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {

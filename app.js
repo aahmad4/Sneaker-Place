@@ -12,6 +12,7 @@ import methodOverride from "method-override";
 import flash from "connect-flash";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
+import dotenv from "dotenv";
 
 import commentRoutes from "./routes/comments.js";
 import shoeRoutes from "./routes/shoes.js";

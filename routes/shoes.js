@@ -1,8 +1,10 @@
 import express from "express";
 const router = express.Router({ mergeParams: true });
 import Shoe from "../models/shoe.js";
-
 import Stripe from "stripe";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const stripe = new Stripe(process.env.PRIVATEKEY);
 
