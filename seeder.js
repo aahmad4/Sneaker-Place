@@ -1,6 +1,6 @@
 import Shoe from "./models/shoe.model.js";
 import Comment from "./models/comment.model.js";
-import { shoes } from "./data/shoes.data.js";
+import { shoes } from "./data/shoes.js";
 
 const seedDB = async () => {
   await Shoe.deleteMany();
