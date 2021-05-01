@@ -33,7 +33,7 @@ const registrationForm = (req, res) => {
   }
 };
 
-const registerUser = asyncHandler(async (req, res) => {
+const registerUser = (req, res) => {
   const { username, password } = req.body;
 
   const newUser = new User({ username: username });
@@ -48,7 +48,7 @@ const registerUser = asyncHandler(async (req, res) => {
       res.redirect("/shoes");
     });
   });
-});
+};
 
 const loginForm = (req, res) => {
   if (req.isAuthenticated()) {
