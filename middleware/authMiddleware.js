@@ -9,7 +9,7 @@ export const isLoggedIn = (req, res, next) => {
   res.redirect("/login");
 };
 
-export const checkOwnership = async (req, res, next) => {
+export const checkShoeOwnership = async (req, res, next) => {
   if (req.isAuthenticated()) {
     try {
       const foundShoe = await Shoe.findById(req.params.id);

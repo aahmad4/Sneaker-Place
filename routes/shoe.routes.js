@@ -9,7 +9,10 @@ import {
   deleteShoe,
   purchaseShoe,
 } from "../controllers/shoe.controller.js";
-import { isLoggedIn, checkOwnership } from "../middleware/authMiddleware.js";
+import {
+  isLoggedIn,
+  checkShoeOwnership,
+} from "../middleware/authMiddleware.js";
 
 const router = express.Router({ mergeParams: true });
 
@@ -18,9 +21,9 @@ router.route("/new").get(isLoggedIn, getNewShoeFormPage);
 router
   .route("/:id")
   .get(getShoeInfoPage)
-  .put(checkOwnership, editShoe)
-  .delete(checkOwnership, deleteShoe);
-router.route("/:id/edit").get(checkOwnership, getEditShoePage);
+  .put(checkShoeOwnership, editShoe)
+  .delete(checkShoeOwnership, deleteShoe);
+router.route("/:id/edit").get(checkShoeOwnership, getEditShoePage);
 router.route("/purchase").post(purchaseShoe);
 
 export default router;
