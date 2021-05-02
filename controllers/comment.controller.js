@@ -4,6 +4,7 @@ import Comment from "../models/comment.model.js";
 const getNewCommentFormPage = async (req, res) => {
   try {
     const shoe = await Shoe.findById(req.params.id);
+
     res.render("comments/new", { shoe });
   } catch (error) {
     console.log(error);

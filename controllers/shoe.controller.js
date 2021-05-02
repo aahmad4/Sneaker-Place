@@ -56,6 +56,7 @@ const makeShoe = async (req, res) => {
 
   try {
     await Shoe.create(newShoe);
+
     res.redirect("/shoes");
   } catch (error) {
     console.log(error);
@@ -87,6 +88,7 @@ const getEditShoePage = async (req, res) => {
 const editShoe = async (req, res) => {
   try {
     await Shoe.findByIdAndUpdate(req.params.id, req.body.shoe);
+
     res.redirect("/shoes/" + req.params.id);
   } catch (error) {
     res.redirect("/shoes");
@@ -95,6 +97,7 @@ const editShoe = async (req, res) => {
 
 const deleteShoe = async (req, res) => {
   await Shoe.findByIdAndRemove(req.params.id);
+
   res.redirect("/shoes");
 };
 
