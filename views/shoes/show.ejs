@@ -112,12 +112,13 @@
                 <div class="col-10">
                   <p class="mb-2">
                     <strong><%= comment.author.username %></strong>
-                    <% if (comment.createdAt.toUTCString() ==
-                    comment.updatedAt.toUTCString() ) { %>
+                    <% if (comment.createdAt && comment.createdAt.toUTCString()
+                    === comment.updatedAt.toUTCString() ) { %>
                     <em style="font-size: 15px">
                       - Created on <%= comment.createdAt.toLocaleString() %>
                     </em>
-                    <% } else if (comment.createdAt.toUTCString() !=
+                    <% } else if (comment.createdAt &&
+                    comment.createdAt.toUTCString() !==
                     comment.updatedAt.toUTCString() ) { %>
                     <em style="font-size: 15px">
                       - Updated on <%= comment.updatedAt.toLocaleString() %>
