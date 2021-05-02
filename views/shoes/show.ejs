@@ -111,8 +111,20 @@
               <div class="row mb-4">
                 <div class="col-10">
                   <p class="mb-2">
-                    <strong><%= comment.author.username %></strong
-                    ><em style="font-size: 15px">- Posted 10 days ago</em>
+                    <strong><%= comment.author.username %></strong>
+                    <% if (comment.createdAt.toUTCString() ==
+                    comment.updatedAt.toUTCString() ) { %>
+                    <em style="font-size: 15px">
+                      - Created on <%= comment.createdAt.toLocaleString() %>
+                    </em>
+                    <% } else if (comment.createdAt.toUTCString() !=
+                    comment.updatedAt.toUTCString() ) { %>
+                    <em style="font-size: 15px">
+                      - Updated on <%= comment.updatedAt.toLocaleString() %>
+                    </em>
+                    <% } else { %>
+                    <em style="font-size: 15px"> - Posted 30+ days ago </em>
+                    <% } %>
                   </p>
                   <p><%= comment.text %></p>
                   <% if (currentUser &&
