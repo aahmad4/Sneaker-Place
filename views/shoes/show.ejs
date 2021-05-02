@@ -24,8 +24,8 @@
               </a>
               <a href="">
                 <span class="badge bg-primary shadow-1-strong mr-1">
-                  Submitted by <%= shoe.author.username %></span
-                >
+                  Submitted by <%= shoe.author.username %>
+                </span>
               </a>
               <a href="">
                 <span class="badge bg-danger shadow-1-strong mr-1"
@@ -51,9 +51,23 @@
             <p><%= shoe.description %></p>
 
             <p>
-              <em style="display: inline"
-                >Submitted by <%= shoe.author.username %></em
-              >
+              <% if (shoe.createdAt && shoe.createdAt.toUTCString() ===
+              shoe.updatedAt.toUTCString()) { %>
+              <em style="display: inline">
+                Submitted by <%= shoe.author.username %> on <%=
+                shoe.createdAt.toLocaleString() %>
+              </em>
+              <% } else if (shoe.createdAt && shoe.createdAt.toUTCString() !==
+              shoe.updatedAt.toUTCString() ) { %>
+              <em style="display: inline">
+                Updated by <%= shoe.author.username %> on <%=
+                shoe.updatedAt.toLocaleString() %>
+              </em>
+              <% } else { %>
+              <em style="display: inline">
+                Submitted by <%= shoe.author.username %> 30+ days ago
+              </em>
+              <% } %>
             </p>
 
             <form
