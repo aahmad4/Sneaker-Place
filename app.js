@@ -64,6 +64,8 @@ app.use("/", indexRoutes);
 app.use("/shoes", shoeRoutes);
 app.use("/shoes/:id/comments", commentRoutes);
 
-app.listen(process.env.PORT || 8000, () => {
-  console.log(`App is running!`);
+const port = process.env.PORT || 8000;
+
+app.listen(port, () => {
+  console.log(`App listening on http://localhost:${port}`);
 });
