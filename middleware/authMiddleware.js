@@ -9,43 +9,41 @@ export const isLoggedIn = (req, res, next) => {
   res.redirect("/login");
 };
 
-export const checkOwnership = (req, res, next) => {
+export const checkOwnership = async (req, res, next) => {
   if (req.isAuthenticated()) {
-    Shoe.findById(req.params.id, (err, foundShoe) => {
-      if (err) {
-        req.flash("error", "Item not found!");
-        res.redirect("back");
+    try {
+      const foundShoe = await Shoe.findById(req.params.id);
+
+      if (foundShoe.author.id.equals(req.user._id)) {
+        next();
       } else {
-        // Does user own shoe
-        if (foundShoe.author.id.equals(req.user._id)) {
-          next();
-        } else {
-          req.flash("error", "Permission denied, you don't own that item!");
-          res.redirect("back");
-        }
+        req.flash("error", "Permission denied, you don't own that item!");
+        res.redirect("back");
       }
-    });
+    } catch (error) {
+      req.flash("error", "Item not found!");
+      res.redirect("back");
+    }
   } else {
     req.flash("error", "Please login first!");
     res.redirect("back");
   }
 };
 
-export const checkCommentOwnership = (req, res, next) => {
+export const checkCommentOwnership = async (req, res, next) => {
   if (req.isAuthenticated()) {
-    Comment.findById(req.params.comment_id, (err, foundComment) => {
-      if (err) {
-        res.redirect("back");
+    try {
+      const foundComment = await Comment.findById(req.params.comment_id);
+
+      if (foundComment.author.id.equals(req.user._id)) {
+        next();
       } else {
-        // Does user own comment
-        if (foundComment.author.id.equals(req.user._id)) {
-          next();
-        } else {
-          req.flash("error", "You don't have permission to do that!");
-          res.redirect("back");
-        }
+        req.flash("error", "You don't have permission to do that!");
+        res.redirect("back");
       }
-    });
+    } catch (error) {
+      res.redirect("back");
+    }
   } else {
     req.flash("error", "Must be logged in!");
     res.redirect("back");

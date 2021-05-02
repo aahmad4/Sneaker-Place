@@ -51,7 +51,7 @@ const registerUser = async (req, res) => {
     });
   } catch (error) {
     req.flash("error", error.message);
-    return res.render("register");
+    res.redirect("back");
   }
 };
 
