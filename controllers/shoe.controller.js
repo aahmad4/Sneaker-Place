@@ -1,7 +1,7 @@
-import Shoe from "../models/shoe.model.js";
-import { escapeRegex } from "../util/escapeRegex.js";
 import Stripe from "stripe";
 import dotenv from "dotenv";
+import Shoe from "../models/shoe.model.js";
+import { escapeRegex } from "../util/escapeRegex.js";
 
 dotenv.config();
 
