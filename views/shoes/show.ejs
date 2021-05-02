@@ -85,7 +85,7 @@
             <% if (currentUser && shoe.author.id.equals(currentUser._id)) { %>
             <a
               href="/shoes/<%= shoe._id %>/edit"
-              class="btn btn-xs btn-warning"
+              class="btn btn-sm btn-warning"
               style="margin-top: 15px"
               >Edit</a
             >
@@ -95,7 +95,7 @@
               action="/shoes/<%= shoe._id %>?_method=DELETE"
               method="POST"
             >
-              <button id="delete-form" class="btn btn-danger btn-xs">
+              <button id="delete-form" class="btn btn-danger btn-sm">
                 Delete
               </button>
             </form>
@@ -145,7 +145,7 @@
                   <% if (currentUser &&
                   comment.author.id.equals(currentUser._id)) { %>
                   <a
-                    class="btn btn-xs btn-warning"
+                    class="btn btn-sm btn-warning"
                     href="/shoes/<%=shoe._id%>/comments/<%=comment._id%>/edit"
                     >Edit</a
                   >
@@ -156,7 +156,7 @@
                   >
                     <input
                       type="submit"
-                      class="btn btn-xs btn-danger"
+                      class="btn btn-sm btn-danger"
                       value="Delete"
                     />
                   </form>
