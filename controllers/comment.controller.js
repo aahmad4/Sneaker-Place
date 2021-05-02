@@ -1,79 +1,72 @@
 import Shoe from "../models/shoe.model.js";
 import Comment from "../models/comment.model.js";
 
-const getNewCommentFormPage = (req, res) => {
-  Shoe.findById(req.params.id, (err, shoe) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("comments/new", { shoe: shoe });
-    }
-  });
+const getNewCommentFormPage = async (req, res) => {
+  try {
+    const shoe = await Shoe.findById(req.params.id);
+    res.render("comments/new", { shoe });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-const makeComment = (req, res) => {
-  // lookup shoe by ID
-  Shoe.findById(req.params.id, (err, shoe) => {
-    if (err) {
-      console.log(err);
-      res.redirect("/shoes");
-    } else {
-      Comment.create(req.body.comment, (err, comment) => {
-        if (err) {
-          console.log(err);
-        } else {
-          // Add username and id to comment
-          comment.author.id = req.user._id;
-          comment.author.username = req.user.username;
-          // Save comment
-          comment.save();
+const makeComment = async (req, res) => {
+  try {
+    const shoe = await Shoe.findById(req.params.id);
+    const comment = await Comment.create(req.body.comment);
 
-          shoe.comments.push(comment);
-          shoe.save();
-          req.flash("success", "Successfully added comment!");
-          res.redirect("/shoes/" + shoe._id);
-        }
-      });
-    }
-  });
+    comment.author.id = req.user._id;
+    comment.author.username = req.user.username;
+
+    await comment.save();
+
+    shoe.comments.push(comment);
+
+    await shoe.save();
+
+    req.flash("success", "Successfully added comment!");
+    res.redirect("/shoes/" + shoe._id);
+  } catch (error) {
+    console.log(error);
+    res.redirect("/shoes");
+  }
 };
 
-const getEditCommentPage = (req, res) => {
-  Comment.findById(req.params.comment_id, (err, foundComment) => {
-    if (err) {
-      res.redirect("back");
-    } else {
-      res.render("comments/edit", {
-        shoe_id: req.params.id,
-        comment: foundComment,
-      });
-    }
-  });
+const getEditCommentPage = async (req, res) => {
+  try {
+    const foundComment = await Comment.findById(req.params.comment_id);
+
+    res.render("comments/edit", {
+      shoe_id: req.params.id,
+      comment: foundComment,
+    });
+  } catch (error) {
+    console.log(error);
+    res.redirect("back");
+  }
 };
 
-const editComment = (req, res) => {
-  Comment.findByIdAndUpdate(
-    req.params.comment_id,
-    req.body.comment,
-    (err, updatedComment) => {
-      if (err) {
-        res.redirect("back");
-      } else {
-        res.redirect("/shoes/" + req.params.id);
-      }
-    }
-  );
+const editComment = async (req, res) => {
+  try {
+    await Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment);
+
+    res.redirect("/shoes/" + req.params.id);
+  } catch (error) {
+    console.log(error);
+    res.redirect("back");
+  }
 };
 
-const deleteComment = (req, res) => {
-  Comment.findByIdAndRemove(req.params.comment_id, (err) => {
-    if (err) {
-      res.redirect("back");
-    } else {
-      req.flash("success", "Comment deleted!");
-      res.redirect("back");
-    }
-  });
+const deleteComment = async (req, res) => {
+  try {
+    await Comment.findByIdAndRemove(req.params.comment_id);
+
+    req.flash("success", "Comment deleted!");
+    res.redirect("back");
+  } catch (error) {
+    console.log(error);
+    res.redirect("back");
+  }
 };
 
 export {
