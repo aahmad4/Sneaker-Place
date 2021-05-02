@@ -1,5 +1,6 @@
 import express from "express";
 import session from "express-session";
+import MongoStore from "connect-mongo";
 import passport from "passport";
 import LocalStrategy from "passport-local";
 import methodOverride from "method-override";
@@ -27,6 +28,8 @@ app.use(express.static(__dirname + "/public"));
 
 app.use(methodOverride("_method"));
 app.use(flash());
+
+const store = new MongoStore(session);
 
 app.use(
   session({
