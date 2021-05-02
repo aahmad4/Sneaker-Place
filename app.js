@@ -1,6 +1,6 @@
 import express from "express";
 import session from "express-session";
-import MongoStore from "connect-mongo";
+import connectMongo from "connect-mongo";
 import passport from "passport";
 import LocalStrategy from "passport-local";
 import methodOverride from "method-override";
@@ -24,18 +24,26 @@ app.set("view engine", "ejs");
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
 app.use(express.static(__dirname + "/public"));
 
 app.use(methodOverride("_method"));
 app.use(flash());
 
-const store = new MongoStore(session);
+const MongoStore = connectMongo(session);
+
+const store = new MongoStore({
+  url: process.env.DATABASEURL || "mongodb://localhost:27017/xtocks",
+  secret: "Something random lol",
+  touchAfter: 24 * 60 * 60,
+});
 
 app.use(
   session({
     secret: "Something random lol",
     resave: false,
     saveUninitialized: false,
+    store,
   })
 );
 
