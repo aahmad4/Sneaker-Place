@@ -1,5 +1,9 @@
 import express from "express";
 import {
+  isLoggedIn,
+  checkShoeOwnership,
+} from "../middleware/authMiddleware.js";
+import {
   getAllShoes,
   makeShoe,
   getNewShoeFormPage,
@@ -9,10 +13,6 @@ import {
   deleteShoe,
   purchaseShoe,
 } from "../controllers/shoe.controller.js";
-import {
-  isLoggedIn,
-  checkShoeOwnership,
-} from "../middleware/authMiddleware.js";
 
 const router = express.Router({ mergeParams: true });
 
