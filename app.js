@@ -1,45 +1,49 @@
-const express = require("express"),
-  app = express(),
-  bodyParser = require("body-parser"),
-  mongoose = require("mongoose"),
-  Shoe = require("./models/shoe"),
-  Comment = require("./models/comment"),
-  User = require("./models/user"),
-  seedDB = require("./seeds"),
-  passport = require("passport"),
-  LocalStrategy = require("passport-local"),
-  methodOverride = require("method-override"),
-  flash = require("connect-flash");
+import express from "express";
+import session from "express-session";
+import connectMongo from "connect-mongo";
+import passport from "passport";
+import LocalStrategy from "passport-local";
+import methodOverride from "method-override";
+import flash from "connect-flash";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import User from "./models/user.model.js";
+import indexRoutes from "./routes/index.routes.js";
+import shoeRoutes from "./routes/shoe.routes.js";
+import commentRoutes from "./routes/comment.routes.js";
+import connectDB from "./config/db.js";
 
-const commentRoutes = require("./routes/comments"),
-  shoeRoutes = require("./routes/shoes"),
-  indexRoutes = require("./routes/index");
+connectDB();
 
-const session = require("express-session"),
-  MongoStore = require("connect-mongo")(session);
+const app = express();
 
-const url = process.env.DATABASEURL || "mongodb://localhost:27017/xtocks";
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect(url, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-});
-app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 app.use(express.static(__dirname + "/public"));
+
 app.use(methodOverride("_method"));
 app.use(flash());
-// Seed the database
-// seedDB();
 
-// Passport Configuration
+const MongoStore = connectMongo(session);
+
+const store = new MongoStore({
+  url: process.env.DATABASEURL || "mongodb://localhost:27017/xtocks",
+  secret: "Something random lol",
+  touchAfter: 24 * 60 * 60,
+});
+
 app.use(
-  require("express-session")({
+  session({
     secret: "Something random lol",
     resave: false,
     saveUninitialized: false,
+    store,
   })
 );
 
@@ -57,12 +61,11 @@ app.use((req, res, next) => {
 });
 
 app.use("/", indexRoutes);
-// Appends /shoes infront of all shoe routes
 app.use("/shoes", shoeRoutes);
 app.use("/shoes/:id/comments", commentRoutes);
 
-let port = process.env.PORT;
-if (port == null || port == "") {
-  port = 8000;
-}
-app.listen(port);
+const port = process.env.PORT || 8000;
+
+app.listen(port, () => {
+  console.log(`App listening on http://localhost:${port}`);
+});

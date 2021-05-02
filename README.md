@@ -1,4 +1,4 @@
-<h1 align="center">StockX Clone</h1> 
+<h1 align="center">StockX Clone</h1>
 
 <p align="center">
 This is a personal project I created as a platform for my friends, family, and peers at school to have a custom platform to buy, sell, and trade sneakers. The app allows users to register accounts, login, and post shoes for others to browse and buy. I also used The Sneaker Database API to fetch a list of upcoming sneaker releases and showing them on a designated page.   
@@ -10,10 +10,10 @@ A link to an online demo version can be found here: <a href="https://xtocks.hero
 
 ## Summary
 
-  - [Getting Started](#getting-started)
-  - [Built With](#built-with)
-  - [Contributing](#contributing)
-  - [License](#license)
+- [Getting Started](#getting-started)
+- [Built With](#built-with)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Getting Started
 
@@ -45,21 +45,32 @@ $ yarn install
 
 #### Usage
 
+For development purposes I would recommend this setting as it will run the app with nodemon constantly watching your server for new changes.
+
 ```
-$ node app.js
+$ npm run dev
 ```
 
+#### Implementation
+
+In the root directory create a file named `.env` with the following enviornment variables. `DATABASEURL` is the MongoDB Uri. `RAPIDAPIKEY` is the API key used with The Sneaker Database API hosted on RapidAPI. Lastly, `PRIVATEKEY` is the private API key used for Stripe payments.
+
+```
+DATABASEURL =
+RAPIDAPIKEY =
+PRIVATEKEY =
+```
 
 ## Built With
 
-* [Node.js](https://nodejs.org/) - JavaScript runtime engine
-* [Express](https://expressjs.com/) - Back-end web application framework
-* [MongoDB](https://www.mongodb.com/) - Database
-* [Passport](http://www.passportjs.org/) - Unobtrusive authentication for Node.js
-* [Ejs](http://ejs.co/) - Embedded JavaScript templates
-* [The Sneaker Database API](https://thesneakerdatabase.com/api/) - Helpful third-party API for latest sneaker releases
-* [Stripe](https://stripe.com/) - Online payment service
-* [Heroku](https://www.heroku.com/) - Online cloud platform
+- [Node.js](https://nodejs.org/) - JavaScript runtime engine
+- [Express](https://expressjs.com/) - Back-end web application framework
+- [MongoDB](https://www.mongodb.com/) - Database
+- [Passport](http://www.passportjs.org/) - Unobtrusive authentication for Node.js
+- [Ejs](http://ejs.co/) - Embedded JavaScript templates
+- [The Sneaker Database API](https://thesneakerdatabase.com/api/) - Helpful third-party API for latest sneaker releases
+- [Stripe](https://stripe.com/) - Online payment service
+- [Heroku](https://www.heroku.com/) - Online cloud platform
 
 ## Contributing
 

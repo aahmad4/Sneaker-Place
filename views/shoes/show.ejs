@@ -1,189 +1,174 @@
-<!DOCTYPE html>
-<html>
+<%- include("../partials/header") %>
+<main class="mt-4 mb-5">
+  <div class="container">
+    <section class="mb-3">
+      <div class="row">
+        <div class="col-lg-6 mb-4">
+          <img
+            src="<%= shoe.image %>"
+            class="img-fluid"
+            alt=""
+            style="height: 500px; width: 500px; object-fit: scale-down"
+          />
+        </div>
+        <div
+          class="col-lg-6 mb-4 text-center text-lg-left d-flex align-items-center"
+        >
+          <div>
+            <h1 class="mb-0 h4 shoeName"><%= shoe.name %></h1>
+            <div class="mb-3" style="margin-top: 15px">
+              <a href="">
+                <span class="badge bg-success shadow-1-strong mr-1"
+                  ><%= shoe.name %></span
+                >
+              </a>
+              <a href="">
+                <span class="badge bg-primary shadow-1-strong mr-1">
+                  Submitted by <%= shoe.author.username %>
+                </span>
+              </a>
+              <a href="">
+                <span class="badge bg-danger shadow-1-strong mr-1"
+                  >Contact Seller</span
+                >
+              </a>
+              <a href="">
+                <span class="badge bg-warning shadow-1-strong mr-1"
+                  >Check Out Similar Shoes</span
+                >
+              </a>
+            </div>
 
-<head>
-	<title><%= shoe.name %></title>
-	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-	<link rel="manifest" href="/site.webmanifest">
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="HandheldFriendly" content="true" "width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-
-	<meta property="og:site_name" content="XtockS">
-	<meta property="og:url" content="https://xtocks.herokuapp.com/shoes/<%= shoe._id %>">
-	<meta property="og:title" content="<%= shoe.name %>">
-	<meta property="og:description" content="<%= shoe.description %>. Submitted by <%= shoe.author.username %>.">
-	<meta property="og:type" content="website">
-	<meta name="og:image" itemprop="image" content="<%= shoe.image %>">
-	<meta name="theme-color" content="#08A05C">
-	<meta name="twitter:title" content="<%= shoe.name %>">
-	<meta name="twitter:description" content="<%= shoe.description %>. Submitted by <%= shoe.author.username %>.">
-	<meta name="twitter:image" content="<%= shoe.image %>">
-	<meta name="twitter:image:alt" content="XtockS <%= shoe.name %> | Website Preview">
-
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
-	<link rel="stylesheet" href="/styles/mdb.min.css" />
-	<link rel="stylesheet" href="/styles/main.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
-	<script src="https://checkout.stripe.com/checkout.js" defer></script>
-	<script src="/js/purchase.js" defer></script>
-</head>
-
-<body>
-	<header style="margin-bottom:90px;">
-		<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-			<div class="container">
-				<a class="navbar-brand" href="/">
-					<Strong style="color:white;padding-top:.5%;padding-bottom:.5%;">XtockS</Strong>
-				</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarExample01"
-					aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarExample01">
-					<ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-					</ul>
-					<ul class="navbar-nav list-inline">
-						<% if (!currentUser) { %>
-						<li class=""><a class="nav-link" href="/feed"
-								style="font-size:17px;color:white;padding-top:.5%;padding-bottom:.5%;">Feed</a></li>
-						<li class="nav-item"><a class="nav-link" href="/login"
-								style="font-size:17px;color:white;padding-top:.5%;padding-bottom:.5%;">Login</a></li>
-						<li class="nav-item"><a class="nav-link" href="/register"
-								style="font-size:17px;color:white;padding-top:.5%;padding-bottom:.5%;">Sign Up</a></li>
-						<% } else { %>
-						<li class=""><a class="nav-link" href="#"
-								style="font-size:17px;color:white;padding-top:.5%;padding-bottom:.5%;">Signed In As
-								<%=currentUser.username%></a></li>
-						<li class="nav-item"><a class="nav-link" href="/feed"
-								style="font-size:17px;color:white;padding-top:.5%;padding-bottom:.5%;">Feed</a></li>
-						<li class="nav-item"><a class="nav-link" href="/logout"
-								style="font-size:17px;color:white;padding-top:.5%;padding-bottom:.5%;">Logout</a></li>
-						<% } %>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</header>
-	<% if (error && error.length > 0){ %>
-	<div class="container">
-		<div class="alert alert-danger" role="alert">
-			<%= error %>
-		</div>
-	</div>
-	<% } %>
-	<% if (success && success.length > 0){ %>
-	<div class="container">
-		<div class="alert alert-success" role="alert">
-			<%= success %>
-		</div>
-	</div>
-	<% } %>
-	<main class="mt-4 mb-5">
-		<div class="container">
-			<section class="mb-3">
-				<div class="row">
-					<div class="col-lg-6 mb-4">
-						<img src="<%= shoe.image %>" class="img-fluid" alt=""
-							style="height:500px;width:500px;object-fit:scale-down;" />
-					</div>
-					<div class="col-lg-6 mb-4 text-center text-lg-left d-flex align-items-center">
-						<div>
-							<h1 class="mb-0 h4 shoeName"><%= shoe.name %></h1>
-							<div class="mb-3" style="margin-top:15px;">
-								<a href="">
-									<span class="badge bg-success shadow-1-strong mr-1"><%= shoe.name %></span>
-								</a>
-								<a href="">
-									<span class="badge bg-primary shadow-1-strong mr-1">
-										Submitted by <%= shoe.author.username %></span>
-								</a>
-								<a href="">
-									<span class="badge bg-danger shadow-1-strong mr-1">Contact Seller</span>
-								</a>
-								<a href="">
-									<span class="badge bg-warning shadow-1-strong mr-1">Check Out Similar Shoes</span>
-								</a>
-							</div>
-
-							<p class="lead">
-								<!-- <span class="mr-1">
+            <p class="lead">
+              <!-- <span class="mr-1">
 								<del>$<%= (shoe.price) * 1.2 %></del>
 							</span> -->
-								<span class="purchase">$<%= shoe.price %></span>
-							</p>
+              <span class="purchase">$<%= shoe.price %></span>
+            </p>
 
-							<p class="lead font-weight-bold">Description</p>
+            <p class="lead font-weight-bold">Description</p>
 
-							<p>
-								<%= shoe.description %>
-							</p>
+            <p><%= shoe.description %></p>
 
-							<p>
-								<em style="display:inline;">Submitted by <%= shoe.author.username %></em>
-							</p>
+            <p>
+              <% if (shoe.createdAt && shoe.createdAt.toUTCString() ===
+              shoe.updatedAt.toUTCString()) { %>
+              <em style="display: inline">
+                Submitted by <%= shoe.author.username %> on <%=
+                shoe.createdAt.toLocaleString() %>
+              </em>
+              <% } else if (shoe.createdAt && shoe.createdAt.toUTCString() !==
+              shoe.updatedAt.toUTCString() ) { %>
+              <em style="display: inline">
+                Updated by <%= shoe.author.username %> on <%=
+                shoe.updatedAt.toLocaleString() %>
+              </em>
+              <% } else { %>
+              <em style="display: inline">
+                Submitted by <%= shoe.author.username %> 30+ days ago
+              </em>
+              <% } %>
+            </p>
 
-							<form class="d-flex justify-content-center justify-content-lg-start">
-								<a class="btn btn-primary btn-md my-0 p" onclick="purchaseClicked()">
-									Buy now
-									<i class="fas fa-shopping-cart ml-1"></i>
-								</a>
-							</form>
+            <form
+              class="d-flex justify-content-center justify-content-lg-start"
+            >
+              <a
+                class="btn btn-primary btn-md my-0 p"
+                onclick="purchaseClicked()"
+              >
+                Buy now
+                <i class="fas fa-shopping-cart ml-1"></i>
+              </a>
+            </form>
 
-							<% if (currentUser && shoe.author.id.equals(currentUser._id)) { %>
-							<a href="/shoes/<%= shoe._id %>/edit" class="btn btn-xs btn-warning"
-								style="margin-top:15px;">Edit</a>
-							<form id="delete-form" style="display: inline;margin-top:15px;"
-								action="/shoes/<%= shoe._id %>?_method=DELETE" method="POST">
-								<button id="delete-form" class="btn btn-danger btn-xs">
-									Delete
-								</button>
-							</form>
-							<% } %>
-						</div>
-					</div>
-				</div>
-			</section>
-			<div class="container" style="background-color:#f5f5f5;padding-top:25px;padding-bottom:15px;">
-				<div class="container">
-					<div class="container">
-						<div class="container">
-							<section class="mb-3">
-								<!-- <p class="text-center"><strong>Comments</strong></p> -->
-								<div class="text-center border-bottom mb-3">
-									<a style="margin-bottom:20px;" class="btn btn-success"
-										href="/shoes/<%= shoe._id %>/comments/new"><i
-											class="fas fa-comments mr-2"></i>Add
-										new comment</a>
-								</div>
-								<% shoe.comments.reverse().forEach(function(comment){ %>
-								<div class="row mb-4">
-									<div class="col-10">
-										<p class="mb-2"><strong><%= comment.author.username %></strong><em
-												style="font-size:15px;">- Posted 10 days ago</em></p>
-										<p>
-											<%= comment.text %>
-										</p>
-										<% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
-										<a class="btn btn-xs btn-warning"
-											href="/shoes/<%=shoe._id%>/comments/<%=comment._id%>/edit">Edit</a>
-										<form action="/shoes/<%=shoe._id%>/comments/<%=comment._id%>/?_method=DELETE"
-											method="POST" style="display: inline">
-											<input type="submit" class="btn btn-xs btn-danger" value="Delete" />
-										</form>
-										<% } %>
-									</div>
-								</div>
-								<% }) %>
-							</section>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		</div>
-	</main>
-	<%- include("../partials/footer") %>
+            <% if (currentUser && shoe.author.id.equals(currentUser._id)) { %>
+            <a
+              href="/shoes/<%= shoe._id %>/edit"
+              class="btn btn-sm btn-warning"
+              style="margin-top: 15px"
+              >Edit</a
+            >
+            <form
+              id="delete-form"
+              style="display: inline; margin-top: 15px"
+              action="/shoes/<%= shoe._id %>?_method=DELETE"
+              method="POST"
+            >
+              <button id="delete-form" class="btn btn-danger btn-sm">
+                Delete
+              </button>
+            </form>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div
+      class="container"
+      style="background-color: #f5f5f5; padding-top: 25px; padding-bottom: 15px"
+    >
+      <div class="container">
+        <div class="container">
+          <div class="container">
+            <section class="mb-3">
+              <!-- <p class="text-center"><strong>Comments</strong></p> -->
+              <div class="text-center border-bottom mb-3">
+                <a
+                  style="margin-bottom: 20px"
+                  class="btn btn-success"
+                  href="/shoes/<%= shoe._id %>/comments/new"
+                  ><i class="fas fa-comments mr-2"></i>Add new comment</a
+                >
+              </div>
+              <% shoe.comments.reverse().forEach(function(comment){ %>
+              <div class="row mb-4">
+                <div class="col-10">
+                  <p class="mb-2">
+                    <strong><%= comment.author.username %></strong>
+                    <% if (comment.createdAt && comment.createdAt.toUTCString()
+                    === comment.updatedAt.toUTCString() ) { %>
+                    <em style="font-size: 15px">
+                      - Created on <%= comment.createdAt.toLocaleString() %>
+                    </em>
+                    <% } else if (comment.createdAt &&
+                    comment.createdAt.toUTCString() !==
+                    comment.updatedAt.toUTCString() ) { %>
+                    <em style="font-size: 15px">
+                      - Updated on <%= comment.updatedAt.toLocaleString() %>
+                    </em>
+                    <% } else { %>
+                    <em style="font-size: 15px"> - Posted 30+ days ago </em>
+                    <% } %>
+                  </p>
+                  <p><%= comment.text %></p>
+                  <% if (currentUser &&
+                  comment.author.id.equals(currentUser._id)) { %>
+                  <a
+                    class="btn btn-sm btn-warning"
+                    href="/shoes/<%=shoe._id%>/comments/<%=comment._id%>/edit"
+                    >Edit</a
+                  >
+                  <form
+                    action="/shoes/<%=shoe._id%>/comments/<%=comment._id%>/?_method=DELETE"
+                    method="POST"
+                    style="display: inline"
+                  >
+                    <input
+                      type="submit"
+                      class="btn btn-sm btn-danger"
+                      value="Delete"
+                    />
+                  </form>
+                  <% } %>
+                </div>
+              </div>
+              <% }) %>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<%- include("../partials/footer") %>
