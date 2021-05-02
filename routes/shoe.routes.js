@@ -1,45 +1,8 @@
 import express from "express";
-const router = express.Router({ mergeParams: true });
 import Shoe from "../models/shoe.model.js";
-import Stripe from "stripe";
-import dotenv from "dotenv";
+import { isLoggedIn, checkOwnership } from "../middleware/authMiddleware.js";
 
-dotenv.config();
-
-const stripe = new Stripe(process.env.PRIVATEKEY);
-
-router.use(express.json());
-
-// Middleware
-const isLoggedIn = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  req.flash("error", "Please Login First!");
-  res.redirect("/login");
-};
-
-const checkOwnership = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    Shoe.findById(req.params.id, (err, foundShoe) => {
-      if (err) {
-        req.flash("error", "Item not found!");
-        res.redirect("back");
-      } else {
-        // Does user own shoe
-        if (foundShoe.author.id.equals(req.user._id)) {
-          next();
-        } else {
-          req.flash("error", "Permission denied, you don't own that item!");
-          res.redirect("back");
-        }
-      }
-    });
-  } else {
-    req.flash("error", "Please login first!");
-    res.redirect("back");
-  }
-};
+const router = express.Router({ mergeParams: true });
 
 const escapeRegex = (text) => {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");

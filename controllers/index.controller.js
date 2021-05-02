@@ -1,7 +1,6 @@
-import asyncHandler from "express-async-handler";
+import User from "../models/user.model.js";
 import passport from "passport";
 import axios from "axios";
-import User from "../models/user.model.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -10,20 +9,25 @@ const homePage = (req, res) => {
   res.redirect("/shoes");
 };
 
-const feedPage = asyncHandler(async (req, res) => {
-  const { data } = await axios.get(
-    "https://v1-sneakers.p.rapidapi.com/v1/sneakers",
-    {
-      params: { limit: "100" },
-      headers: {
-        "x-rapidapi-key": process.env.RAPIDAPIKEY,
-        "x-rapidapi-host": "v1-sneakers.p.rapidapi.com",
-      },
-    }
-  );
+const feedPage = async (req, res) => {
+  try {
+    const { data } = await axios.get(
+      "https://v1-sneakers.p.rapidapi.com/v1/sneakers",
+      {
+        params: { limit: "100" },
+        headers: {
+          "x-rapidapi-key": process.env.RAPIDAPIKEY,
+          "x-rapidapi-host": "v1-sneakers.p.rapidapi.com",
+        },
+      }
+    );
 
-  res.render("feed", { parsedData: data });
-});
+    res.render("feed", { parsedData: data });
+  } catch (error) {
+    req.flash("error", "Unable to fetch latest sneaker releases");
+    res.redirect("/shoes");
+  }
+};
 
 const registrationForm = (req, res) => {
   if (req.isAuthenticated()) {
@@ -33,21 +37,22 @@ const registrationForm = (req, res) => {
   }
 };
 
-const registerUser = (req, res) => {
-  const { username, password } = req.body;
+const registerUser = async (req, res) => {
+  try {
+    const { username, password } = req.body;
 
-  const newUser = new User({ username: username });
+    const newUser = new User({ username });
 
-  User.register(newUser, password, (err, user) => {
-    if (err) {
-      req.flash("error", err.message);
-      return res.render("register");
-    }
+    const createdUser = await User.register(newUser, password);
+
     passport.authenticate("local")(req, res, () => {
-      req.flash("success", "Welcome " + user.username);
+      req.flash("success", "Welcome " + createdUser.username);
       res.redirect("/shoes");
     });
-  });
+  } catch (error) {
+    req.flash("error", error.message);
+    return res.render("register");
+  }
 };
 
 const loginForm = (req, res) => {
