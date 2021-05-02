@@ -1,67 +1,88 @@
 <%- include("./partials/header") %>
-        <main class="my-5">
-            <div class="container">
-                <section class="text-center text-md-left">
-                    <h4 class="mb-5"><strong>Upcoming Sneaker Releases</strong></h4>
-                    <% for (var i = 0; i < 100; i++){ %>
-                    <% if (parsedData['results'][i].media.imageUrl) { %>
-                    <div class="row">
-                        <div class="col-md-4 mb-4">
-                            <div class="bg-image hover-overlay shadow-1-strong rounded ripple" data-ripple-color="light">
-                                <img src="<%= parsedData['results'][i].media.imageUrl %>" class="img-fluid" />
-                                <a href="#!">
-                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-8 mb-4">
-                            <h5><%= parsedData["results"][i].title %></h5>
-                            <p>
-                                <strong>Colorway:</strong> <%= parsedData["results"][i].colorway %>
-                            </p>
-                            <p>
-                                <strong>Release Date:</strong> <%= parsedData["results"][i].releaseDate %>
-                            </p>
-                            <p>
-                                <strong>Retail Price:</strong> $<%= parsedData["results"][i].retailPrice %>.00
-                            </p>
-                            <p>
-                                <strong>Gender:</strong> <%= (parsedData["results"][i].gender).charAt(0).toUpperCase() + (parsedData["results"][i].gender).slice(1) %>
-                            </p>
-                            <button type="button" class="btn btn-primary">Read</button>
-                        </div>
-                    </div>
-                    <% } %>
-                    <% } %>
-                    <% for (var i = 0; i < 100; i++){ %>
-                    <% if (!parsedData['results'][i].media.imageUrl) { %>
-                    <div class="row">
-                        <div class="col-md-4 mb-4">
-                            <div class="bg-image hover-overlay shadow-1-strong rounded ripple" data-ripple-color="light">
-                                <img src="/random_shoe.jpg" class="img-fluid" />
-                                <a href="#!">
-                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-8 mb-4">
-                            <h5><%= parsedData["results"][i].title %></h5>
-                            <p>
-                                <strong>Colorway:</strong> <%= parsedData["results"][i].colorway %>
-                            </p>
-                            <p>
-                                <strong>Release Date:</strong> <%= parsedData["results"][i].releaseDate %>
-                            </p>
-                            <p>
-                                <strong>Retail Price:</strong> $<%= parsedData["results"][i].retailPrice %>.00
-                            </p>
-                            <p>
-                                <strong>Gender:</strong> <%= (parsedData["results"][i].gender).charAt(0).toUpperCase() + (parsedData["results"][i].gender).slice(1) %>
-                            </p>
-                            <button type="button" class="btn btn-primary">Read</button>
-                        </div>
-                    </div>
-                    <% } %>
-                    <% } %>
-    
-        <%- include("./partials/footer") %>
+<main class="my-5">
+  <div class="container">
+    <section class="text-center text-md-left">
+      <h4 class="mb-5"><strong>Upcoming Sneaker Releases</strong></h4>
+      <% for (var i = 0; i < 100; i++){ %> <% if
+      (parsedData['results'][i].media.imageUrl) { %>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div
+            class="bg-image hover-overlay shadow-1-strong rounded ripple"
+            data-ripple-color="light"
+          >
+            <img
+              src="<%= parsedData['results'][i].media.imageUrl %>"
+              class="img-fluid"
+            />
+            <a href="#!">
+              <div
+                class="mask"
+                style="background-color: rgba(251, 251, 251, 0.15)"
+              ></div>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-8 mb-4">
+          <h5><%= parsedData["results"][i].title %></h5>
+          <p>
+            <strong>Colorway:</strong> <%= parsedData["results"][i].colorway %>
+          </p>
+          <p>
+            <strong>Release Date:</strong> <%=
+            parsedData["results"][i].releaseDate %>
+          </p>
+          <p>
+            <strong>Retail Price:</strong> $<%=
+            parsedData["results"][i].retailPrice %>.00
+          </p>
+          <p>
+            <strong>Gender:</strong> <%=
+            (parsedData["results"][i].gender).charAt(0).toUpperCase() +
+            (parsedData["results"][i].gender).slice(1) %>
+          </p>
+          <button type="button" class="btn btn-primary">Read</button>
+        </div>
+      </div>
+      <% } %> <% } %> <% for (var i = 0; i < 100; i++){ %> <% if
+      (!parsedData['results'][i].media.imageUrl) { %>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div
+            class="bg-image hover-overlay shadow-1-strong rounded ripple"
+            data-ripple-color="light"
+          >
+            <img src="/random_shoe.jpg" class="img-fluid" />
+            <a href="#!">
+              <div
+                class="mask"
+                style="background-color: rgba(251, 251, 251, 0.15)"
+              ></div>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-8 mb-4">
+          <h5><%= parsedData["results"][i].title %></h5>
+          <p>
+            <strong>Colorway:</strong> <%= parsedData["results"][i].colorway %>
+          </p>
+          <p>
+            <strong>Release Date:</strong> <%=
+            parsedData["results"][i].releaseDate %>
+          </p>
+          <p>
+            <strong>Retail Price:</strong> $<%=
+            parsedData["results"][i].retailPrice %>.00
+          </p>
+          <p>
+            <strong>Gender:</strong> <%=
+            (parsedData["results"][i].gender).charAt(0).toUpperCase() +
+            (parsedData["results"][i].gender).slice(1) %>
+          </p>
+          <button type="button" class="btn btn-primary">Read</button>
+        </div>
+      </div>
+      <% } %> <% } %> <%- include("./partials/footer") %>
+    </section>
+  </div>
+</main>

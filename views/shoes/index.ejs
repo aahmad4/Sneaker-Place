@@ -1,74 +1,98 @@
-<%- include("../partials/header") %>
-<% if (noMatch !== undefined) { %>
+<%- include("../partials/header") %> <% if (noMatch !== undefined) { %>
 <div class="container">
-	<div class="alert alert-danger" role="alert" style="text-align: center;">
-		<%= noMatch %>
-	</div>
+  <div class="alert alert-danger" role="alert" style="text-align: center">
+    <%= noMatch %>
+  </div>
 </div>
-<% } %>
-<% if (yesMatch !== undefined) { %>
+<% } %> <% if (yesMatch !== undefined) { %>
 <div class="container">
-	<div class="alert alert-success" role="alert" style="text-align: center;">
-		We found <%= yesMatch %> results matching that search!
-	</div>
+  <div class="alert alert-success" role="alert" style="text-align: center">
+    We found <%= yesMatch %> results matching that search!
+  </div>
 </div>
 <% } %>
 <main class="my-5">
-	<div class="container">
-		<section style="background-color: #d3d3d3;">
-			<div id="intro" class="p-5 text-center shadow-5 rounded mb-5" style="background-color: #d3d3d3;">
-				<% if (currentUser) { %>
-				<h1 class="mb-3 h2"><%= currentUser.username %>, let's look at some shoes</h1>
-				<% } else { %>
-				<h1 class="mb-3 h2">Welcome to XtockS</h1>
-				<% } %>
-				<p class="mb-3">Buy, Sell, or Trade Shoes at STEM</p>
-				<a class="btn btn-success m-2" href="/shoes/new" role="button">Post a New Shoe</a>
-				<a class="btn btn-success m-2" href="/feed" role="button">Upcoming Releases</a>
-			</div>
-		</section>
+  <div class="container">
+    <section style="background-color: #d3d3d3">
+      <div
+        id="intro"
+        class="p-5 text-center shadow-5 rounded mb-5"
+        style="background-color: #d3d3d3"
+      >
+        <% if (currentUser) { %>
+        <h1 class="mb-3 h2">
+          <%= currentUser.username %>, let's look at some shoes
+        </h1>
+        <% } else { %>
+        <h1 class="mb-3 h2">Welcome to XtockS</h1>
+        <% } %>
+        <p class="mb-3">Buy, Sell, or Trade Shoes at STEM</p>
+        <a class="btn btn-success m-2" href="/shoes/new" role="button"
+          >Post a New Shoe</a
+        >
+        <a class="btn btn-success m-2" href="/feed" role="button"
+          >Upcoming Releases</a
+        >
+      </div>
+    </section>
 
-		<section class="text-center">
-			<div class="row">
-				<div class="col-lg-6 col-md-6 mb-5">
-					<h4><strong style="">Most Recent Shoe Submissions</strong></h4>
-				</div>
-				<div class="col-lg-6 col-md-6 mb-5">
-					<form class="d-flex input-group w-auto" action="/shoes" method="GET">
-						<input type="text" name="search" class="form-control" placeholder="Shoe Name"
-							aria-label="Search" />
-						<button class="btn btn-outline-success" type="submit" data-ripple-color="dark">
-							Search
-						</button>
-					</form>
-				</div>
-			</div>
+    <section class="text-center">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 mb-5">
+          <h4><strong>Most Recent Shoe Submissions</strong></h4>
+        </div>
+        <div class="col-lg-6 col-md-6 mb-5">
+          <form class="d-flex input-group w-auto" action="/shoes" method="GET">
+            <input
+              type="text"
+              name="search"
+              class="form-control"
+              placeholder="Shoe Name"
+              aria-label="Search"
+            />
+            <button
+              class="btn btn-outline-success"
+              type="submit"
+              data-ripple-color="dark"
+            >
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
 
-			<div class="row" style="display:flex; flex-wrap:wrap;">
-				<% shoes.reverse().forEach(function(shoe){ %>
-				<div class="col-lg-4 col-md-6 mb-4">
-					<div class="card" style="margin-bottom:25px;">
-						<div class="bg-image hover-overlay ripple" data-ripple-color="light">
-							<img src="<%= shoe.image %>" class="img-fluid"
-								style="height:300px;width:300px;object-fit:scale-down;" />
-							<a href="/shoes/<%= shoe._id %>">
-								<div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-							</a>
-						</div>
-						<div class="card-body">
-							<h5 class="card-title">
-								<%= shoe.name %>
-							</h5>
-							<p class="card-text">
-								$<%= shoe.price %>
-							</p>
-							<a href="/shoes/<%= shoe._id %>" class="btn btn-success">More Info</a>
-						</div>
-					</div>
-				</div>
-				<% }) %>
-			</div>
-		</section>
-	</div>
+      <div class="row" style="display: flex; flex-wrap: wrap">
+        <% shoes.reverse().forEach(function(shoe){ %>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card" style="margin-bottom: 25px">
+            <div
+              class="bg-image hover-overlay ripple"
+              data-ripple-color="light"
+            >
+              <img
+                src="<%= shoe.image %>"
+                class="img-fluid"
+                style="height: 300px; width: 300px; object-fit: scale-down"
+              />
+              <a href="/shoes/<%= shoe._id %>">
+                <div
+                  class="mask"
+                  style="background-color: rgba(251, 251, 251, 0.15)"
+                ></div>
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"><%= shoe.name %></h5>
+              <p class="card-text">$<%= shoe.price %></p>
+              <a href="/shoes/<%= shoe._id %>" class="btn btn-success"
+                >More Info</a
+              >
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </section>
+  </div>
 </main>
 <%- include("../partials/footer") %>
