@@ -1,20 +1,20 @@
 import express from "express";
 import {
-  homePage,
-  feedPage,
-  registrationForm,
+  getHomePage,
+  getFeedPage,
+  getRegistrationFormPage,
   registerUser,
-  loginForm,
+  getLoginFormPage,
   logoutUser,
   loginUser,
 } from "../controllers/index.controller.js";
 
 const router = express.Router();
 
-router.route("/").get(homePage);
-router.route("/feed").get(feedPage);
-router.route("/register").get(registrationForm).post(registerUser);
-router.route("/login").get(loginForm).post(loginUser);
+router.route("/").get(getHomePage);
+router.route("/feed").get(getFeedPage);
+router.route("/register").get(getRegistrationFormPage).post(registerUser);
+router.route("/login").get(getLoginFormPage).post(loginUser);
 router.route("/logout").get(logoutUser);
 
 export default router;

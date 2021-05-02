@@ -5,11 +5,11 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const homePage = (req, res) => {
+const getHomePage = (req, res) => {
   res.redirect("/shoes");
 };
 
-const feedPage = async (req, res) => {
+const getFeedPage = async (req, res) => {
   try {
     const { data } = await axios.get(
       "https://v1-sneakers.p.rapidapi.com/v1/sneakers",
@@ -29,7 +29,7 @@ const feedPage = async (req, res) => {
   }
 };
 
-const registrationForm = (req, res) => {
+const getRegistrationFormPage = (req, res) => {
   if (req.isAuthenticated()) {
     res.redirect("/shoes");
   } else {
@@ -55,7 +55,7 @@ const registerUser = async (req, res) => {
   }
 };
 
-const loginForm = (req, res) => {
+const getLoginFormPage = (req, res) => {
   if (req.isAuthenticated()) {
     res.redirect("/shoes");
   } else {
@@ -75,11 +75,11 @@ const loginUser = passport.authenticate("local", {
 });
 
 export {
-  homePage,
-  feedPage,
-  registrationForm,
+  getHomePage,
+  getFeedPage,
+  getRegistrationFormPage,
   registerUser,
-  loginForm,
+  getLoginFormPage,
   logoutUser,
   loginUser,
 };
