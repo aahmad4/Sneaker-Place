@@ -7,66 +7,59 @@ dotenv.config();
 
 const stripe = new Stripe(process.env.PRIVATEKEY);
 
-const getAllShoes = (req, res) => {
-  var noMatch = undefined;
-  var yesMatch = undefined;
+const getAllShoes = async (req, res) => {
+  let noMatch = undefined;
+  let yesMatch = undefined;
+
   if (req.query.search) {
     const regex = new RegExp(escapeRegex(req.query.search), "gi");
-    Shoe.find({ name: regex }, (err, shoes) => {
-      if (err) {
-        console.log(err);
-      } else if (shoes.length < 1) {
+
+    try {
+      const shoes = await Shoe.find({ name: regex });
+
+      if (shoes.length < 1) {
         noMatch = "Sorry, no shoes matching that criteria were found!";
       } else if (shoes.length >= 1) {
         yesMatch = shoes.length;
       }
-      res.render("shoes/index", {
-        shoes: shoes,
-        noMatch,
-        noMatch,
-        yesMatch: yesMatch,
-      });
-    });
+
+      res.render("shoes/index", { shoes, noMatch, yesMatch });
+    } catch (error) {
+      console.log(error);
+    }
   } else {
-    //  Get all shoes from database
-    Shoe.find({}, (err, shoes) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.render("shoes/index", {
-          shoes: shoes,
-          noMatch: noMatch,
-          yesMatch: yesMatch,
-        });
-      }
-    });
+    try {
+      const shoes = await Shoe.find({});
+
+      res.render("shoes/index", { shoes, noMatch, yesMatch });
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 
-const makeShoe = (req, res) => {
-  const name = req.body.name;
-  const price = req.body.price;
-  const image = req.body.image;
-  const des = req.body.description;
+const makeShoe = async (req, res) => {
+  const { name, price, image, description } = req.body;
+
   const author = {
     id: req.user._id,
     username: req.user.username,
   };
+
   const newShoe = {
-    name: name,
-    image: image,
-    description: des,
-    author: author,
-    price: price,
+    name,
+    image,
+    description,
+    author,
+    price,
   };
-  // Create a new shoe and save to database
-  Shoe.create(newShoe, (err, newlyCreated) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.redirect("/shoes");
-    }
-  });
+
+  try {
+    await Shoe.create(newShoe);
+    res.redirect("/shoes");
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const getNewShoeFormPage = (req, res) => {
@@ -74,61 +67,51 @@ const getNewShoeFormPage = (req, res) => {
 };
 
 const getShoeInfoPage = (req, res) => {
-  // Find shoe with provided ID
   Shoe.findById(req.params.id)
     .populate("comments")
     .exec((err, foundShoe) => {
       if (err) {
         console.log(err);
       } else {
-        // Render show template with that shoe
         res.render("shoes/show", { shoe: foundShoe });
       }
     });
 };
 
-const getEditShoePage = (req, res) => {
-  Shoe.findById(req.params.id, (err, foundShoe) => {
-    res.render("shoes/edit", { shoe: foundShoe });
-  });
+const getEditShoePage = async (req, res) => {
+  const foundShoe = await Shoe.findById(req.params.id);
+
+  res.render("shoes/edit", { shoe: foundShoe });
 };
 
-const editShoe = (req, res) => {
-  // Find and update the correct shoe
-  Shoe.findByIdAndUpdate(req.params.id, req.body.shoe, (err, updatedShoe) => {
-    if (err) {
-      res.redirect("/shoes");
-    } else {
-      res.redirect("/shoes/" + req.params.id);
-    }
-  });
+const editShoe = async (req, res) => {
+  try {
+    await Shoe.findByIdAndUpdate(req.params.id, req.body.shoe);
+    res.redirect("/shoes/" + req.params.id);
+  } catch (error) {
+    res.redirect("/shoes");
+  }
 };
 
-const deleteShoe = (req, res) => {
-  Shoe.findByIdAndRemove(req.params.id, (err) => {
-    if (err) {
-      res.redirect("/shoes");
-    } else {
-      res.redirect("/shoes");
-    }
-  });
+const deleteShoe = async (req, res) => {
+  await Shoe.findByIdAndRemove(req.params.id);
+  res.redirect("/shoes");
 };
 
-const purchaseShoe = (req, res) => {
-  stripe.charges
-    .create({
+const purchaseShoe = async (req, res) => {
+  try {
+    await stripe.charges.create({
       amount: req.body.total,
       source: req.body.stripeTokenId,
       currency: "usd",
-    })
-    .then(() => {
-      console.log("Charge Successful");
-      res.json({ message: "Successfully purchased item" });
-    })
-    .catch(() => {
-      console.log("Charge failure");
-      res.status(500).end();
     });
+
+    console.log("Charge Successful");
+    res.json({ message: "Successfully purchased item" });
+  } catch (error) {
+    console.log("Charge failure");
+    res.status(500).end();
+  }
 };
 
 export {
