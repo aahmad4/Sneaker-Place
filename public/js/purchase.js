@@ -1,6 +1,5 @@
 const stripeHandler = StripeCheckout.configure({
-  key:
-    "pk_test_51H4HxfEzvu7bwBd3AqPbAwjJNEeaRrK6hYyGkYkAQXQLoz9SakpgFOpSJHAdfRJSDjk1rUJVsFURfqCLkLTYBjMa002OUbnnwW",
+  key: "pk_test_51H4HxfEzvu7bwBd3AqPbAwjJNEeaRrK6hYyGkYkAQXQLoz9SakpgFOpSJHAdfRJSDjk1rUJVsFURfqCLkLTYBjMa002OUbnnwW",
   locale: "auto",
   token: async (token) => {
     try {
@@ -36,7 +35,7 @@ const purchaseClicked = () => {
   stripeHandler.open({
     amount: price,
     billingAddress: true,
-    name: "XtockS",
+    name: "Sneaker Place",
     description: document.getElementsByClassName("shoeName")[0].innerText,
     image:
       "https://pbs.twimg.com/profile_images/684418269306945536/HDodeG76_400x400.jpg",

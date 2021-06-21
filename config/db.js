@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const connectDB = async () => {
   try {
     const connection = await mongoose.connect(
-      process.env.DATABASEURL || "mongodb://localhost:27017/xtocks",
+      process.env.DATABASEURL || "mongodb://localhost:27017/sneaker-place",
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,

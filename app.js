@@ -33,7 +33,7 @@ app.use(flash());
 const MongoStore = connectMongo(session);
 
 const store = new MongoStore({
-  url: process.env.DATABASEURL || "mongodb://localhost:27017/xtocks",
+  url: process.env.DATABASEURL || "mongodb://localhost:27017/sneakerplace",
   secret: "Something random lol",
   touchAfter: 24 * 60 * 60,
 });

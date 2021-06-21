@@ -1,11 +1,11 @@
-<h1 align="center">StockX Clone</h1>
+<h1 align="center">Sneaker Place</h1>
 
 <p align="center">
 This is a personal project I created as a platform for my friends, family, and peers at school to have a custom platform to buy, sell, and trade sneakers. The app allows users to register accounts, login, and post shoes for others to browse and buy. I also used The Sneaker Database API to fetch a list of upcoming sneaker releases and showing them on a designated page.   
 </p>
 
 <p align="center">
-A link to an online demo version can be found here: <a href="https://xtocks.herokuapp.com" target="_blank">xtocks.herokuapp.com</a>
+A link to an online demo version can be found here: <a href="https://sneakerplace.herokuapp.com" target="_blank">sneakerplace.herokuapp.com</a>
 </p>
 
 ## Summary
@@ -26,7 +26,7 @@ A step by step series of examples that tell you how to get a development env run
 #### Clone
 
 ```sh
-$ git clone https://github.com/aahmad4/StockX-Clone
+$ git clone https://github.com/aahmad4/Sneaker-Place
 ```
 
 #### Installation
