@@ -1,7 +1,7 @@
 {
-  "name": "xtocks",
+  "name": "sneaker-place",
   "version": "1.0.0",
-  "description": "XtockS",
+  "description": "sneaker-place",
   "main": "app.js",
   "type": "module",
   "scripts": {

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= locals.shoe ? shoe.name : "XtockS" %></title>
+    <title><%= locals.shoe ? shoe.name : "Sneaker Place" %></title>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -13,11 +13,11 @@
     />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="HandheldFriendly" content="true" />
-    <meta property="og:site_name" content="XtockS" />
+    <meta property="og:site_name" content="Sneaker Place" />
     <% if (locals.shoe) { %>
     <meta
       property="og:url"
-      content="https://xtocks.herokuapp.com/shoes/<%= shoe._id %>"
+      content="https://sneakerplace.herokuapp.com/shoes/<%= shoe._id %>"
     />
     <meta property="og:title" content="<%= shoe.name %>" />
     <meta
@@ -35,14 +35,14 @@
     <meta name="twitter:image" content="<%= shoe.image %>" />
     <meta
       name="twitter:image:alt"
-      content="XtockS <%= shoe.name %> | Website Preview"
+      content="Sneaker Place <%= shoe.name %> | Website Preview"
     />
     <% } else { %>
-    <meta property="og:url" content="https://xtocks.herokuapp.com" />
-    <meta property="og:title" content="StockX Clone" />
+    <meta property="og:url" content="https://sneakerplace.herokuapp.com" />
+    <meta property="og:title" content="Sneaker Place" />
     <meta
       property="og:description"
-      content="A custom platform for buying, selling, and trading sneakers. Inspired by StockX."
+      content="A custom online marketplace for buying, selling, and trading sneakers."
     />
     <meta property="og:type" content="website" />
     <meta
@@ -51,16 +51,16 @@
       content="https://lh3.googleusercontent.com/9xb18Phr4gj4K4MhtVPnTV-MIE-YS-5VANmr1spilwyVi-smfZ_OuYOrt8oCx44XGQ"
     />
     <meta name="theme-color" content="#08A05C" />
-    <meta name="twitter:title" content="XtockS" />
+    <meta name="twitter:title" content="Sneaker Place" />
     <meta
       name="twitter:description"
-      content="A custom platform for buying, selling, and trading sneakers. Inspired by StockX."
+      content="A custom online marketplace for buying, selling, and trading sneakers."
     />
     <meta
       name="twitter:image"
       content="https://lh3.googleusercontent.com/9xb18Phr4gj4K4MhtVPnTV-MIE-YS-5VANmr1spilwyVi-smfZ_OuYOrt8oCx44XGQ"
     />
-    <meta name="twitter:image:alt" content="XtockS Website Preview" />
+    <meta name="twitter:image:alt" content="Sneaker Place Website Preview" />
     <% } %>
     <link
       rel="stylesheet"
@@ -83,7 +83,7 @@
           <a class="navbar-brand" href="/">
             <Strong
               style="color: white; padding-top: 0.5%; padding-bottom: 0.5%"
-              >XtockS</Strong
+              >Sneaker Place</Strong
             >
           </a>
           <button
@@ -196,4 +196,5 @@
       <div class="alert alert-success" role="alert"><%= success %></div>
     </div>
     <% } %>
- 
+  </body>
+</html>
