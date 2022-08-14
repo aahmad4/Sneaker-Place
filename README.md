@@ -1,7 +1,7 @@
 <h1 align="center">Sneaker Place</h1>
 
 <p align="center">
-This is a personal project I created as a platform for my friends, family, and peers at school to have a custom platform to buy, sell, and trade sneakers. The app allows users to register accounts, login, and post shoes for others to browse and buy. I also used The Sneaker Database API to fetch a list of upcoming sneaker releases and showing them on a designated page.   
+A custom online sneaker marketplace. I also used The Sneaker Database API to fetch a list of sneaker releases and show them on a designated page.   
 </p>
 
 <p align="center">
@@ -77,7 +77,3 @@ PRIVATEKEY =
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
